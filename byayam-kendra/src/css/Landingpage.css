@@ -1,0 +1,82 @@
+
+.head .title ul li a:hover {
+    color: #4a9e73; /* Green text color on hover */
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    background-color:#E2DFD2;; /* Initially transparent */
+    height: 200px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 70px;
+}
+.head.head-small {
+    height: 70px; /* Smaller height */
+    background: linear-gradient(132deg, #f4dfe9, #a8d3d4, #f9ede3);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+}
+
+.head.head-small .logo img {
+    width: 100px; /* Smaller logo */
+    height: 100px;
+    margin-top: 5px;
+}
+
+/* Title styles to align properly in smaller header */
+.head.head-small .title ul li {
+    font-size: 20px; /* Reduce font size */
+    margin: -50px 50px !important;
+}
+.head.head-small .title ul li a {
+    color: #2b0352;
+}
+.head.head-small .title ul li a:hover {
+    color: #1b814c;
+}
+.head.head-small .buttons{
+    margin-top: 10px !important;
+    margin-left: -120px;
+}
+.head.head-small .buttons a {
+    font-size: 18px; 
+    /* Smaller button links */
+    margin: -10px 10px !important;
+}
+
+.head.head-small .buttons span {
+    font-size: 18px;
+    margin: -10px 10px !important;
+}
+.logo{
+    padding: 0px 10px;
+}
+.logo img{
+    margin-top: 15px;
+    margin-left: 50px;
+    width: 230px;
+    height: 230px;
+}
+.title{
+    display: flex;
+}
+.title ul li {
+    margin: 0 60px;
+    font-size: 25px;
+}
+
+.title ul{
+    display: flex;
+    list-style: none;
+    margin-top:50px;
+    margin-right: 5px;
+}
+
+.title ul li a{
+    text-decoration: none;
+    color: black;
+}
