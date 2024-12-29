@@ -1,54 +1,44 @@
 
-.head .title ul li a:hover {
-    color: #4a9e73; /* Green text color on hover */
-}
-
-.head {
+.head-small {
     display: flex;
     justify-content: space-between;
-    background-color:#E2DFD2;; /* Initially transparent */
-    height: 200px;
+    /* background-image: linear-gradient(to bottom right,#F9F6EE,#FAEBD7); */
+    background-color: 	#E2DFD2;
+    border-radius: 8px;
+    height: 120px;
     align-items: center;
     position: sticky;
-    top: 0;
+    top:0px;
     z-index: 1000;
-    transition: transform 0.3s ease-in-out;
-    margin-bottom: 70px;
+    margin-bottom: 5px;
 }
-.head.head-small {
-    height: 70px; /* Smaller height */
-    background: linear-gradient(132deg, #f4dfe9, #a8d3d4, #f9ede3);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
-}
-
-.head.head-small .logo img {
-    width: 100px; /* Smaller logo */
-    height: 100px;
+.head-small .logo img {
+    width: 150px; /* Smaller logo */
+    height: 150px;
     margin-top: 5px;
 }
 
 /* Title styles to align properly in smaller header */
-.head.head-small .title ul li {
-    font-size: 20px; /* Reduce font size */
-    margin: -50px 50px !important;
+.head-small .title ul li {
+    font-size: 22px; /* Reduce font size */
+    margin: 0px 50px !important;
 }
-.head.head-small .title ul li a {
+.head-small .title ul li a {
     color: #2b0352;
 }
-.head.head-small .title ul li a:hover {
-    color: #1b814c;
+.head-small .title ul li a:hover {
+    color: #992222;
 }
-.head.head-small .buttons{
+.head-small .buttons{
     margin-top: 10px !important;
     margin-left: -120px;
 }
-.head.head-small .buttons a {
+.head-small .buttons a {
     font-size: 18px; 
     /* Smaller button links */
     margin: -10px 10px !important;
 }
-
-.head.head-small .buttons span {
+.head-small .buttons span {
     font-size: 18px;
     margin: -10px 10px !important;
 }
@@ -57,26 +47,135 @@
 }
 .logo img{
     margin-top: 15px;
-    margin-left: 50px;
+    margin-left: 10px;
     width: 230px;
     height: 230px;
 }
 .title{
     display: flex;
 }
-.title ul li {
-    margin: 0 60px;
-    font-size: 25px;
-}
-
 .title ul{
     display: flex;
     list-style: none;
-    margin-top:50px;
-    margin-right: 5px;
+    margin-top:30px;
+    margin-right: 80px;
 }
-
 .title ul li a{
     text-decoration: none;
     color: black;
+}
+.buttons a:hover{
+    text-decoration: underline;
+    text-decoration-color: #4a9e73;
+}
+
+.buttons{
+    margin-top: 5px;
+    margin-right: 35px;
+}
+.buttons span{
+    font-size: 20px;
+    margin-left: 18px;
+}
+.buttons a{
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 18px;
+    color: black;
+}
+#empr{
+    color: #343434;
+    font-weight: bold;
+}
+#empr:hover{
+    text-decoration: underline;
+    text-decoration-color: #f2bad6;
+}
+.barcontent img{
+    margin-top: 40px;
+    margin-right: 20px;
+    width: 300px;
+    height: 300px;
+}
+.bar{
+    display: flex;
+    background-color: #992222;
+    justify-content: center;
+    border-radius: 6px;
+    margin-bottom: 80px;
+}
+.info h2{
+    font-size: 30px;
+    margin-left: 30px;
+    color: rgb(229, 209, 209);
+    padding-top: 20px;
+}
+.info p{
+    font-size: 23px;
+    color: rgb(229, 209, 209);
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-bottom: 10px;
+    text-align: justify;
+}
+
+/* Slideshow */
+.slideshow {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+    border-radius: 0px;
+}
+
+.slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures images fill the container without stretching */
+    opacity: 0;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    z-index: -1;  /* Keep inactive images behind */
+}
+
+.slideshow img.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 1;  /* Bring active image to the front */
+}
+
+.slideshow img.inactive {
+    opacity: 0;
+    transform: translateX(100%);
+    z-index: -1;  /* Ensure inactive images are behind */
+}
+
+/* Scrolling Banner */
+.scrolling-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: #333;
+    overflow: hidden;
+    margin-bottom: 80px;
+}
+
+.program-item {
+    padding: 0;
+    height: 550px;
+    min-width: 600px;  /* Ensure width is consistent */
+    display: inline-block;
+    background-color: #444;
+    margin-right: 20px;
+    border-radius: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.program-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images fill the space without distortion */
+    border-radius: 0px;
 }
