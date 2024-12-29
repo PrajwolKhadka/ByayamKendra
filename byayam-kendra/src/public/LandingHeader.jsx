@@ -3,23 +3,10 @@ import logo from '/resources/Untitled1.png';
 import '../css/Landingpage.css';
 
 function Header() {
-    const [scrolled, setScrolled] = useState(false);
-
-    // Dynamically set scroll state when the component is rendered
-    if (typeof window !== 'undefined') {
-        window.onscroll = () => {
-            if (window.scrollY > 10 && !scrolled) {
-                setScrolled(true);
-            } else if (window.scrollY <= 1.5 && scrolled) {
-                setScrolled(false);
-            }
-        };
-    }
-
     const scrollToSection = (e, id) => {
         e.preventDefault(); // Prevent default anchor behavior
         const element = document.getElementById(id);
-        const headerHeight = document.querySelector('.head')?.offsetHeight || 70; // Get header height dynamically
+        const headerHeight = document.querySelector('.head-small')?.offsetHeight || 70; // Get header height dynamically
         const offset = headerHeight + 5; // Add 5px extra offset
         if (element) {
             const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -29,9 +16,8 @@ function Header() {
             });
         }
     };
-
     return (
-        <nav className={`head ${scrolled ? 'head-small' : ''}`}>
+        <nav className="head-small">
             <div className="logo">
                 <img src={logo} alt="Logo" />
             </div>
@@ -49,10 +35,11 @@ function Header() {
                 </ul>
             </div>
             <div className="buttons">
+            <a href="Employer.html" id="empr">Signup</a>
                 {/* <Link to="../signup">Signup</Link>
-                <Link to="../login">Login</Link>
+                <Link to="../login">Login</Link> */}
                 <span>|</span>
-                <a href="Employer.html" id="empr">Employer Zone</a> */}
+                <a href="Employer.html" id="empr">Login</a>
             </div>
         </nav>
     );
