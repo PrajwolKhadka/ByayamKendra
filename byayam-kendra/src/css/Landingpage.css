@@ -13,8 +13,6 @@
     margin-bottom: 5px;
 }
 .head-small .logo img {
-    width: 150px; /* Smaller logo */
-    height: 150px;
     margin-top: 5px;
 }
 
@@ -25,6 +23,7 @@
 }
 .head-small .title ul li a {
     color: #1b1b1b;
+    font-family:sans-serif;
 }
 .head-small .title ul li a:hover {
     color: #992222;
@@ -48,8 +47,8 @@
 .logo img{
     margin-top: 15px;
     margin-left: 10px;
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
 }
 .title{
     display: flex;
@@ -153,7 +152,6 @@
     transform: translateX(100%);
     z-index: -1;  /* Ensure inactive images are behind */
 }
-
 /* Scrolling Banner */
 .scrolling-banner {
     position: relative;

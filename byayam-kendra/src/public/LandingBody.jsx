@@ -34,7 +34,6 @@ useEffect(() => {
            ))}
         </div>
       </section>
-      
       <section className="bar animated">
         <div className="info" id="about">
           <h2>Who are we?</h2>

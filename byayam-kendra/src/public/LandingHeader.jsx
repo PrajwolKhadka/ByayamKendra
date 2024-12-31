@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import logo from '/resources/Untitled1.png';
+import logo from '/resources/newLogo.png';
+
 import '../css/Landingpage.css';
 
 function Header() {
