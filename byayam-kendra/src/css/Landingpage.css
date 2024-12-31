@@ -187,16 +187,11 @@
 }
 .Collab{
     align-content: center;
-    margin-left: 690px;
-}
-.Collab p{
-    margin-left: 20px;
-    margin-top: -15px;
-    color: #1b814c;
+    margin-left: 640px;
 }
 .Collabh1{
     font-size: 30px;
-    color: #4a9e73;
+    color: rgb(229, 209, 209);
 }
 
 .horizontal-scroll-container {
@@ -236,10 +231,10 @@
 }
 
 .horizontal-scroll-container::-webkit-scrollbar-thumb {
-    background:#77b3eb;
+    background:#E2DFD2;
     border-radius: 4px;
 }
 
 .horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #1b814c
+    background: #f2bad6;
 }
