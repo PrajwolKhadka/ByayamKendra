@@ -63,6 +63,7 @@
 .title ul li a{
     text-decoration: none;
     color: black;
+    font-weight: bold;
 }
 .buttons a:hover{
     text-decoration: underline;
@@ -92,26 +93,27 @@
     text-decoration-color: #f2bad6;
 }
 .barcontent img{
-    margin-top: 40px;
+    margin-top: 100px;
     margin-right: 20px;
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
 }
 .bar{
     display: flex;
     background-color: #992222;
     justify-content: center;
     border-radius: 6px;
-    margin-bottom: 80px;
+    margin-bottom: 0px;
 }
 .info h2{
-    font-size: 30px;
+    font-size: 65px;
     margin-left: 30px;
+    margin-bottom: -5px;
     color: rgb(229, 209, 209);
     padding-top: 20px;
 }
 .info p{
-    font-size: 23px;
+    font-size: 25px;
     color: rgb(229, 209, 209);
     margin-left: 30px;
     margin-right: 30px;
@@ -178,4 +180,66 @@
     height: 100%;
     object-fit: cover; /* Ensure images fill the space without distortion */
     border-radius: 0px;
+}
+.ScrollView{
+    margin-top:0px;
+    background-color: #992222;
+}
+.Collab{
+    align-content: center;
+    margin-left: 690px;
+}
+.Collab p{
+    margin-left: 20px;
+    margin-top: -15px;
+    color: #1b814c;
+}
+.Collabh1{
+    font-size: 30px;
+    color: #4a9e73;
+}
+
+.horizontal-scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 8px;
+    margin-left: 40px;
+    width:90%;
+  }
+  
+  .horizontal-scroll {
+    display: flex;
+    gap: 0px;
+    height: 90x;
+  }
+  
+  .brand-item {
+    display: inline-block;
+    text-align: center;
+    flex-shrink: 0;
+    width: 130px; /* Adjust as needed */
+    /* background-color: #4a9e73; */
+    background: transparent;
+    border-radius: 8px; /* Optional */
+    padding: 10px;
+  }
+  
+  .brand-item img {
+    max-width: 100%;
+    height: 65%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 4px; /* Smaller height for horizontal scrollbar */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background:#77b3eb;
+    border-radius: 4px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #1b814c
 }
