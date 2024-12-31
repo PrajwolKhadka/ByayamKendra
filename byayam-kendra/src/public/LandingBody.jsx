@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import '../css/Landingpage.css';
+const Collab=React.lazy(()=>import('./Collab.jsx'))
 const images = [
   '/resources/scroll1.png',
   '/resources/scroll2.png',
@@ -53,9 +54,10 @@ useEffect(() => {
           </p>
         </div>
         <div className="barcontent">
-          <img src="../resources/info.png" alt="Who are we?" />
+          <img src="../resources/info.png" alt="Who are we?" loading='lazy'/>
         </div>
       </section>
+      <Collab/>
     </>
   );
 }
