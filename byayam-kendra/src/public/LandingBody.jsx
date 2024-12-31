@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import '../css/Landingpage.css';
@@ -16,7 +16,7 @@ const [currentSlide, setCurrentSlide] = useState(0);
 useEffect(() => {
   const slideInterval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-  }, 7000);
+  }, 4000);
   return () => clearInterval(slideInterval);
 }, []);
   return (
@@ -57,7 +57,9 @@ useEffect(() => {
           <img src="../resources/info.png" alt="Who are we?" loading='lazy'/>
         </div>
       </section>
+      <Suspense>
       <Collab/>
+      </Suspense>
     </>
   );
 }
