@@ -1,4 +1,6 @@
-
+body{
+    background-color: #1b1b1b;
+}
 .head-small {
     display: flex;
     justify-content: space-between;
@@ -236,3 +238,19 @@
 .horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
     background: #f2bad6;
 }
+/* Landingpage.css */
+.loading-screen {
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98vh;
+    background-color:#E2DFD2;
+  }
+  
+  .loading-video {
+    max-width: 100%;
+    max-height: 90%;
+    object-fit: cover;
+  }
+  
