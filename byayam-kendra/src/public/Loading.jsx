@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/Landingpage.css"; // Import your CSS
+import { lazy } from "react";
 
 function Loading({ onVideoEnd }) {
   // `onVideoEnd` is a callback to notify the parent when the video finishes.
@@ -18,6 +19,7 @@ function Loading({ onVideoEnd }) {
         muted
         onEnded={onVideoEnd} // Call parent handler when the video ends
         className="loading-video"
+        loading="lazy"
       />
     </div>
   );
