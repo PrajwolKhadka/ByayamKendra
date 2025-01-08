@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '/resources/newLogo.png';
-
+import { Link } from 'react-router-dom';
 import '../css/Landingpage.css';
 
 function Header() {
@@ -36,11 +36,9 @@ function Header() {
                 </ul>
             </div>
             <div className="buttons">
-            <a href="Employer.html" id="empr">Signup</a>
-                {/* <Link to="../signup">Signup</Link>
-                <Link to="../login">Login</Link> */}
+                <Link to="../signup">Signup</Link> 
                 <span>|</span>
-                <a href="Employer.html" id="empr">Login</a>
+                <Link to="../login">Login</Link> 
             </div>
         </nav>
     );

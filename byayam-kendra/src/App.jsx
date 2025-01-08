@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Loading from "./public/Loading";
 import LandingPage from "./public/LandingPage";
+import Signup from "./public/Signup.jsx";
+import Login from "./public/Login";
 
 function App() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true); 
-  const [hasToken, setHasToken] = useState(false); 
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [hasToken, setHasToken] = useState(false);
 
   useEffect(() => {
     // Check for token on app load
@@ -14,26 +16,32 @@ function App() {
   }, []);
 
   const handleVideoEnd = () => {
-    // Video chalna banda vayepaxi chalnu parxa yo
+    // Video end handler
     setIsVideoPlaying(false);
   };
 
   if (isVideoPlaying) {
-    // Standby rakhna ko lagi yo loading component paxi
     return <Loading onVideoEnd={handleVideoEnd} />;
   }
 
-  // Conditional Rendering depending on token xa ki xaina
-  return hasToken ? (
-    <Suspense>
-    <div className="main-content">
-      <h1>Welcome Back!</h1>
-    </div>
-    </Suspense>
-  ) : (
-    <Suspense>
-    <LandingPage />
-    </Suspense>
+  return (
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {/* Protected Route */}
+          {hasToken ? (
+            <Route path="/" element={<div className="main-content"><h1>Welcome Back!</h1></div>} />
+          ) : (
+            <Route path="/" element={<LandingPage />} />
+          )}
+          {/* Public Routes */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          {/* Redirect invalid routes to the home or LandingPage */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
+    </Router>
   );
 }
 
