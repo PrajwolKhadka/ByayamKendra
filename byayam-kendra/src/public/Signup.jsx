@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/ByayamSignup.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import VideoPlay from './Video';
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -45,10 +46,7 @@ const Signup = () => {
 
   return (
     <div className="video-background">
-      <video autoPlay muted loop>
-        <source src="../resources/background1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <VideoPlay/>  
 
       <div className="content">
         <h1>ByayamKendra.com</h1>
@@ -157,7 +155,7 @@ const Signup = () => {
             <br />
 
             {/* Login Link */}
-            <label className="login">Already have an account?</label>
+            <label className="login">Already have an account? </label>
             <Link to="/login">Login</Link>
           </form>
         </div>
