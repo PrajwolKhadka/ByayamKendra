@@ -3,13 +3,19 @@ import '../css/ByayamSignup.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import VideoPlay from './Video';
+
 const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // State for form fields
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -18,7 +24,7 @@ const Signup = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -32,6 +38,17 @@ const Signup = () => {
       newErrors.confirmPassword = "Passwords do not match.";
     }
 
+    // Validate other fields
+    if (!username) {
+      newErrors.username = "Username is required.";
+    }
+    if (!email) {
+      newErrors.email = "Email is required.";
+    }
+    if (!gender) {
+      newErrors.gender = "Gender is required.";
+    }
+
     // If there are errors, set them
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -39,14 +56,38 @@ const Signup = () => {
     }
 
     // If no errors, proceed with form submission
-    console.log("Form submitted successfully!");
-    navigate('/login')
-    setErrors({});
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          gender,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Signup successful:', data);
+        navigate('/login'); // Redirect to login page
+      } else {
+        console.error('Signup failed:', data.error);
+        setErrors({ general: data.error });
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      setErrors({ general: 'Something went wrong. Please try again.' });
+    }
   };
 
   return (
     <div className="video-background">
-    <VideoPlay/>  
+      <VideoPlay />
 
       <div className="content">
         <h1>ByayamKendra.com</h1>
@@ -64,6 +105,8 @@ const Signup = () => {
               id="Username"
               name="Username"
               placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className={errors.username ? "error-input" : ""}
               required
             />
@@ -80,6 +123,8 @@ const Signup = () => {
               id="E-mail"
               name="E-mail"
               placeholder="example@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={errors.email ? "error-input" : ""}
               required
             />
@@ -136,10 +181,15 @@ const Signup = () => {
 
             {/* Gender */}
             <label htmlFor="Gender">Gender:</label>
-            <select id="Gender" name="Gender" required defaultValue="" className={errors.gender ? "error-input" : ""}>
-              <option value="" disabled>
-                Select your gender
-              </option>
+            <select
+              id="Gender"
+              name="Gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+              className={errors.gender ? "error-input" : ""}
+            >
+              <option value="" disabled>Select your gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -149,9 +199,7 @@ const Signup = () => {
             )}
 
             {/* Sign Up Button */}
-            <button id="RegisterButton" type="submit">
-              SignUp
-            </button>
+            <button id="RegisterButton" type="submit">SignUp</button>
             <br />
 
             {/* Login Link */}
