@@ -6,11 +6,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const pool = new Pool({
-  user: 'postgres', // replace with your PostgreSQL username
+  user: 'postgres',
   host: 'localhost',
-  database: 'byayamkendra', // replace with your PostgreSQL database name
-  password: '1415', // replace with your PostgreSQL password
-  port: 5432, // default PostgreSQL port
+  database: 'byayamkendra',
+  password: '1415', 
+  port: 5432, 
 });
 
 // Function to create users table
