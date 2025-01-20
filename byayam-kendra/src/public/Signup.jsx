@@ -27,7 +27,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
-
+  
     // Validate Passwords
     if (!password) {
       newErrors.password = "Password is required.";
@@ -37,7 +37,7 @@ const Signup = () => {
     } else if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
-
+  
     // Validate other fields
     if (!username) {
       newErrors.username = "Username is required.";
@@ -48,13 +48,13 @@ const Signup = () => {
     if (!gender) {
       newErrors.gender = "Gender is required.";
     }
-
+  
     // If there are errors, set them
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
     // If no errors, proceed with form submission
     try {
       const response = await fetch('http://localhost:3000/api/auth/signup', {
@@ -69,15 +69,15 @@ const Signup = () => {
           gender,
         }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         console.log('Signup successful:', data);
         navigate('/login'); // Redirect to login page
       } else {
         console.error('Signup failed:', data.error);
-        setErrors({ general: data.error });
+        setErrors({ general: data.error });  // Show a general error message to users
       }
     } catch (err) {
       console.error('Error:', err);

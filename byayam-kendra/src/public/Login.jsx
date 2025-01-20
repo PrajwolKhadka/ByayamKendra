@@ -115,7 +115,7 @@ const Login = () => {
             <button id="LoginButton" type="submit" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </button><br />
-            {errors.general && <span className="error-message">{errors.general}</span>}
+            {errors.general && <span className="error-message-login">{errors.general}</span>}<br></br>
             <label className="register">New Here? </label>
             <Link to="/signup">Signup</Link>
           </form>
