@@ -81,7 +81,7 @@
         width: 70%; /* Responsive width */
         margin: 10px 130px; /* Space between items */
     }
-    .barcontent{
+    .barcontent1{
         margin-top: 190px;
         margin-right: 20px;
         width: 300px;
@@ -258,14 +258,7 @@
     }
 
 }
-html{
-    scroll-behavior: smooth;
-}
-body{
-    /* background-image: linear-gradient(to bottom right, #8e2e2e, #911212); */
-    background-color: 	#28282B;
-    font-family: 'Times New Roman', Times, serif;
-}
+
 
 .navbar{
     display: flex;
@@ -468,13 +461,13 @@ body{
     text-decoration: none;
 }
 
-.barcontent img{
+.barcontent1 img{
     margin-top: 40px;
     margin-right: 20px;
     width: 300px;
     height: 300px;
 }
-.bar{
+.bar1{
     display: flex;
     background-color: #992222;
     justify-content: center;
