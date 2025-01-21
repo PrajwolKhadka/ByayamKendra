@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "../css/Landingpage.css"; // Import your CSS
-import { lazy } from "react";
+import React from 'react';
 
-function Loading({ onVideoEnd }) {
-  // `onVideoEnd` is a callback to notify the parent when the video finishes.
-
-  useEffect(() => {
-    const timer = setTimeout(onVideoEnd, 10000); // Fallback in case video doesn't fire `onEnded` (e.g., slow loading)
-
-    return () => clearTimeout(timer); // Cleanup the timer
-  }, [onVideoEnd]);
-
+const Loading = ({ onVideoEnd }) => {
   return (
-    <div className="loading-screen">
+    <div className="loading-container">
       <video
-        src="/resources/loadingscreen2.mp4" // Replace with your video path
         autoPlay
         muted
-        onEnded={onVideoEnd} // Call parent handler when the video ends
-        className="loading-video"
-        loading="lazy"
-      />
+        onEnded={onVideoEnd}
+        style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+      >
+        <source src="../public/resources/loadingscreen2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   );
-}
+};
 
 export default Loading;
