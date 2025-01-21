@@ -14,6 +14,7 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -54,7 +55,7 @@ const Signup = () => {
       setErrors(newErrors);
       return;
     }
-  
+    setIsLoading(true);
     // If no errors, proceed with form submission
     try {
       const response = await fetch('http://localhost:3000/api/auth/signup', {
@@ -82,6 +83,9 @@ const Signup = () => {
     } catch (err) {
       console.error('Error:', err);
       setErrors({ general: 'Something went wrong. Please try again.' });
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -199,9 +203,9 @@ const Signup = () => {
             )}
 
             {/* Sign Up Button */}
-            <button id="RegisterButton" type="submit">SignUp</button>
-            <br />
-
+            <button id="RegisterButton" type="submit" disabled={isLoading}>
+              {isLoading ? 'Signing in...' : 'SignUp'}
+            </button><br/>
             {/* Login Link */}
             <label className="login">Already have an account? </label>
             <Link to="/login">Login</Link>
