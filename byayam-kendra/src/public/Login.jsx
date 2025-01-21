@@ -48,8 +48,9 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Login successful:', data);
-        navigate("/dashboard"); // Redirect to dashboard on successful login
+        localStorage.setItem('token', data.token);
+        // Redirect user to protected page
+        navigate('/dashboard');
       } else {
         console.error('Login failed:', data.error);
         setErrors({ general: data.error });
