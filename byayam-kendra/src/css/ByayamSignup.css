@@ -3,7 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+html, body, #root {
+    height: 100%;
+    margin: 0;  /* Remove default margin that might shrink height */
+    padding: 0; /* Remove any padding that might affect size */
+}
 .video-background{
     height: 100%;
     font-family: Arial, sans-serif;
@@ -49,6 +53,8 @@ video {
     text-align: center;
     margin-right: 25px;
     padding: 20px;
+    width: 100%; /* Ensure it takes the full width */
+    margin: 0; 
 }
 
 #formdiv {

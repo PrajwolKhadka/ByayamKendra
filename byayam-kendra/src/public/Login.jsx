@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../css/ByayamSignup.css';
 import VideoPlay from './Video';
 
-const Login = () => {
+const Login = ({setToken}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -48,7 +48,8 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token);
+        setToken(data.token);
+        console.log("Logging in");
         // Redirect user to protected page
         navigate('/dashboard');
       } else {

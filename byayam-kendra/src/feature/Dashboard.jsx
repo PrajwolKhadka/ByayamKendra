@@ -48,45 +48,8 @@ function Dashboard() {
     return <div className="error-message">{error}</div>;
   }
   return (
-    <main>
-      {/* Home Page Section */}
-      <section className="homePage animated">
-        <div className="homeContent">
-          <a href="Generator.html" className="aa">
-            <div className="generator">
-              <img
-                src="../resources/generator.svg"
-                className="generatorimg"
-                alt="Workout Generator"
-              />
-              <br />
-              <label id="g">Workout Generator</label>
-            </div>
-          </a>
-          <a href="Protein.html" className="aa">
-            <div className="generator">
-              <img
-                src="../resources/protein.svg"
-                className="proteinimg"
-                alt="Protein"
-              />
-              <br />
-              <label id="pr">Protein</label>
-            </div>
-          </a>
-          <a href="Profile.html" className="aa">
-            <div className="generator">
-              <img
-                src="../resources/profile.svg"
-                className="profileimg"
-                alt="Profile"
-              />
-              <br />
-              <label id="p">Profile</label>
-            </div>
-          </a>
-        </div>
-      </section>
+    <main className='homepage-main'>
+      <h1>Dashboard</h1>
     </main>
   );
 }

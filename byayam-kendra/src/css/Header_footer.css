@@ -1,0 +1,107 @@
+/* Header.css */
+
+/* Navbar Section */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #202020;
+    color: white;
+    height: 10%;
+}
+
+.navbar .logodash img {
+    width: 100px;
+    height: 80px;
+    margin-left: 30px;
+}
+
+.navbar h2 {
+    font-family: "Arial", sans-serif;
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+}
+
+/* Menu Button */
+.open-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.open-btn img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    right: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    overflow-y: auto;
+    transition: 0.3s;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 85%;
+}
+
+.sidebar .close-btn img {
+    width: 25px;
+    height: 25px;
+}
+
+
+
+.lists {
+    display: flex;
+    flex-direction: column;
+    margin-top: 95%;
+}
+
+.lists .w3-bar-item {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    transition: background-color 0.3s;
+    margin-bottom: 30px;
+}
+
+.lists .w3-bar-item:hover {
+    background-color: #555;
+}
+
+/* Logout Button */
+.logout {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    background-color: #d9534f;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 70%;
+}
+
+.logout:hover {
+    background-color: #c9302c;
+}
