@@ -31,5 +31,24 @@ export const createUsersTable = async () => {
     console.error("Error creating table", err);
   }
 };
+export const createTrackTable = async () => {
+  try {
+    const query = `
+      CREATE TABLE IF NOT EXISTS workouts (
+        id SERIAL PRIMARY KEY,
+        user_id INT REFERENCES users(id) ON DELETE CASCADE,
+        workout_name VARCHAR(255) NOT NULL,
+        weight VARCHAR(50),
+        reps INT NOT NULL,
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `;
+    await pool.query(query);
+    console.log("Workouts table is ready");
+  } catch (err) {
+    console.error("Error creating workouts table", err);
+  }
+};
 
 export { pool };

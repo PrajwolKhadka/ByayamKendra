@@ -3,11 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-html, body, #root {
-    height: 100%;
-    margin: 0;  /* Remove default margin that might shrink height */
-    padding: 0; /* Remove any padding that might affect size */
-}
 .video-background{
     height: 100%;
     font-family: Arial, sans-serif;
@@ -97,7 +92,10 @@ input, select {
     color: #F0EAD6;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
+.form, input, select {
+    position: relative;
+    z-index: 2; /* Ensure form is above the video */
+}
 /* Center the form on the page */
 .form {
     justify-content: center;
