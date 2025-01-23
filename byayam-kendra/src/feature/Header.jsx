@@ -12,7 +12,13 @@ function Header() {
     const closeSidebar = () => {
         setIsSidebarOpen(false); // Close sidebar
     };
-
+    const handelLogout = () => {
+        // Clear the token from localStorage
+        localStorage.removeItem('token');
+      
+        // Redirect the user to the login page
+        window.location.href = '/login';
+      };
     return (
         <section className="navbar">
             {/* Logo Section */}
@@ -60,7 +66,7 @@ function Header() {
                         Contact Us
                     </Link>
                 </div>
-                <Link to="/login" className="logout">
+                <Link to="/login" className="logout" onClick={handelLogout}>
                     Logout
                 </Link>
             </div>
