@@ -1,15 +1,24 @@
 /* Tracker.css */
-
 .tracker-container {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 100%;
     padding: 20px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 10px;
-    text-align: center;
-    background-color: #f9f9f9;
+    /* background-color: #ccc; */
+    margin-top:30px;
+    display: flex;
   }
-  
+
+  .tracker-container h1{
+    margin-left: 15px;
+    color: #fff;
+  }
+  .tracker-container h3{
+    color: #fff;
+  }
+  .tracker-section{
+    margin-left: 5%;
+  }
   .upload-section {
     margin-bottom: 20px;
   }
@@ -40,38 +49,55 @@
     width: 100%;
     height: 100px;
     margin-top: 20px;
+    margin-left: 12px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-  
+  textarea {
+    width: 554px !important;
+    height: 100px;
+    margin-bottom: 10px;
+    margin-left: 12px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
   .button-group-track {
     margin-top: 20px;
+    margin-left: 15px;
   }
   
   .button-track {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
-    background-color: #007bff;
+    background-color: #992222;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 15px;
   }
   
   .button-track:hover {
-    background-color: #0056b3;
+    background-color: #6b1818;
+  }
+  .tracker-section-table{
+    margin-right: 25%;
+    margin-top: 10px;
   }
   .workout-table {
-    width: 100%;
+    width: 170%;
     margin-top: 20px;
+    background-color: #f1f1f1;
     border-collapse: collapse;
   }
   
   .workout-table th, .workout-table td {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ddd;
-    text-align: left;
+    text-align: center;
   }
   
   .workout-table th {
@@ -81,8 +107,10 @@
   .workout-table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
-  
-  .workout-table tr:hover {
-    background-color: #f1f1f1;
+  .workout-table button{
+    padding: 5px 10px;
+    gap: 55px;
+    color: #992222;
   }
+
   

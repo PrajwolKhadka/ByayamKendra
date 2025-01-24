@@ -107,8 +107,9 @@ const Tracker = () => {
 
   return (
     <div className="tracker-container">
+     
+      <div className="tracker-section">
       <h1>Workout Log</h1>
-
       {/* Workout Name */}
       <input
         type="text"
@@ -142,15 +143,15 @@ const Tracker = () => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Add a description..."
-        className="text-area"
-      />
-
-      {/* Save button */}
-      <button onClick={handleSave} className="button-track">
+        
+      /><br/>
+ {/* Save button */}
+ <button onClick={handleSave} className="button-track">
         {editing ? "Update Progress" : "Save Progress"}
       </button>
-
-      {/* Display saved workout logs in table format */}
+     
+      </div>
+      <div className="tracker-section-table">
       <div className="log-display">
         <h3>Saved Workouts</h3>
         <table className="workout-table">
@@ -178,6 +179,7 @@ const Tracker = () => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );
