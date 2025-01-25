@@ -63,6 +63,8 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     resize: none;
+    background-color: rgb(24, 24, 24) ;
+    color: #ccc;
   }
   .button-group-track {
     margin-top: 20px;

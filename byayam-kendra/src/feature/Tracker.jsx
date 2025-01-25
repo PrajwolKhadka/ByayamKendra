@@ -33,7 +33,7 @@ const Tracker = () => {
     const token = localStorage.getItem('token');
     const url = editing ? 'http://localhost:3000/api/protected/tracker/workouts/' + editing.id : 'http://localhost:3000/api/protected/tracker/workouts';
     const method = editing ? 'PUT' : 'POST';
-  
+
     try {
       const response = await fetch(url, {
         method,
