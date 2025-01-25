@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 const Header=React.lazy(()=>import("./Header.jsx"));
 const Dashboard= React.lazy(()=>import("./Dashboard.jsx"))
 const Tracker= React.lazy(()=>import("./Tracker.jsx"))
+const Suggest= React.lazy(()=>import("./Suggestion.jsx"))
 const Feature=()=>{
     const location = useLocation();
     return(
@@ -17,6 +18,10 @@ const Feature=()=>{
       ):location.pathname === '/tracker' ? (
         <>
         <Tracker/>
+        </>
+      ):location.pathname === '/suggest' ? (
+        <>
+        <Suggest/>
         </>
       ):(
         <div>404 Page Not Found</div>

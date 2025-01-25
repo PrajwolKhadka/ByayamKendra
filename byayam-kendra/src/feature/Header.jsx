@@ -56,7 +56,7 @@ function Header() {
                     <Link to="/dashboard" className="w3-bar-item w3-button">
                         Home
                     </Link>
-                    <Link to="/dashboard" className="w3-bar-item w3-button">
+                    <Link to="/suggest" className="w3-bar-item w3-button">
                         Suggested Workout
                     </Link>
                     <Link to="/tracker" className="w3-bar-item w3-button">
