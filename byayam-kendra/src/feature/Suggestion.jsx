@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import "../css/suggestions.css";
+import {items} from './suggestionData.jsx'
 
 const suggest = () => {
-  const items = [
-    { id: 1, title: "Workout A", description: "Details about Workout A" },
-    { id: 2, title: "Workout B", description: "Details about Workout B" },
-    { id: 3, title: "Workout C", description: "Details about Workout C" },
-    { id: 4, title: "Workout D", description: "Details about Workout D" },
-  ];
-
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
@@ -28,10 +22,27 @@ const suggest = () => {
       </div>
       <div className="main-content-suggest">
         {selectedItem ? (
-          <div className="details-suggest">
+            <div className="details-suggest">
             <h2>{selectedItem.title}</h2>
-            <p>{selectedItem.description}</p>
-          </div>
+            {selectedItem.description.split("\n").map((line, index) => (
+            <p key={index}>{line}</p>
+            ))}
+            {selectedItem.works.length > 0 && (
+            <div className="workout-details">
+                {selectedItem.works.map((work, index) => (
+                <div key={index} className="day-details">
+                    <h3>{work.day}</h3>
+                    {work.exercises.map((exercise, idx) => (
+                    <div key={idx} className="exercise">
+                        <img src={exercise.image} alt={exercise.name} className="exercise-image" loading="lazy"/>
+                        <p>{exercise.name} - {exercise.sets} sets</p>
+                    </div>
+                    ))}
+                </div>
+                ))}
+            </div>
+            )}
+        </div> 
         ) : (
           <div className="placeholder-suggest">Select an item to view details</div>
         )}
