@@ -24,7 +24,7 @@ function Header() {
             {/* Logo Section */}
             <div className="logodash">
                 <Link to="/ByayamDashboard">
-                    <img src="../public/resources/logonew.png" alt="BYAYAM.com" title="BYAYAM.com" />
+                    <img src="../resources/logonew.png" alt="BYAYAM.com" title="BYAYAM.com" />
                 </Link>
             </div>
             <h2>EAT . LIFT . REPEAT</h2>

@@ -12,7 +12,7 @@
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    background-color: rgb(24, 24, 24) ;
+    background-color: #333 ;
   }
   
   .sidebar-suggest-item {

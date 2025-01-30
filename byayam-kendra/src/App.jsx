@@ -42,6 +42,8 @@ const App = () => {
           </ProtectedRoute>}/>
           <Route path="/suggest"element={<ProtectedRoute token={token}><Feature />
           </ProtectedRoute>}/>
+          <Route path="/generate"element={<ProtectedRoute token={token}><Feature />
+          </ProtectedRoute>}/>
           {/* Redirect invalid routes */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

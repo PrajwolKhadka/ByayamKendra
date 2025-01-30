@@ -51,4 +51,24 @@ export const createTrackTable = async () => {
   }
 };
 
+export const createUserStateTable = async () => {
+  try{
+    const query = `
+    CREATE TABLE IF NOT EXISTS userstate(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE  CASCADE,
+    age INT,  
+    height VARCHAR,
+    weight INT,
+    gender VARCHAR(10),
+    fitness_level VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );`;
+  await pool.query(query);
+  console.log("Status table is ready");
+  }catch (err){
+    console.error("Error creating status table", err);
+  }
+}
+
 export { pool };

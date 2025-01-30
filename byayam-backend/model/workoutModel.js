@@ -1,13 +1,13 @@
 import { pool } from '../db/db.js';  // Assuming you're using a connection pool
 
 // Add a workout log for a user
-export const addWorkoutLog = async (userId, workoutName, weight, reps, description) => {
+export const addStatusLog = async (userId, age, height, weight, gender, fitness_level) => {
   const query = `
-    INSERT INTO workouts (user_id, workout_name, weight, reps, description)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO userstate (user_id, age, height, weight, gender,fitness_level)
+    VALUES ($1, $2, $3, $4, $5,$6)
     RETURNING *;
   `;
-  const values = [userId, workoutName, weight, reps, description];
+  const values = [userId, age, height, weight, gender,fitness_level];
 
   try {
     const result = await pool.query(query, values);
@@ -19,8 +19,8 @@ export const addWorkoutLog = async (userId, workoutName, weight, reps, descripti
 };
 
 // Get workout logs by userId
-export const getWorkoutLogsByUserId = async (userId) => {
-  const query = 'SELECT * FROM workouts WHERE user_id = $1;';
+export const getStateByUserId = async (userId) => {
+  const query = 'SELECT * FROM userstate WHERE user_id = $1;';
   const values = [userId];
 
   try {
@@ -33,15 +33,15 @@ export const getWorkoutLogsByUserId = async (userId) => {
 };
 
 // Update a workout log
-export const updateWorkoutLog = async (workoutId, userId, workoutName, weight, reps, description) => {
+export const updateStatusLog = async (StatusId, userId, age, height, weight, gender, fitness_level) => {
   const query = `
-    UPDATE workouts
-    SET workout_name = $2, weight = $3, reps = $4, description = $5
-    WHERE id = $1 AND user_id = $6
+    UPDATE userstate
+    SET age = $2, height = $3, weight = $4, gender = $5, fitness_level = $6
+    WHERE id = $1 AND user_id = $7
     RETURNING *;
   `;
-  const values = [workoutId, workoutName, weight, reps, description, userId];
-
+  console.log("Updating status with values:", { StatusId, age, height, weight, gender, fitness_level, userId });
+  const values = [StatusId, age, height, weight, gender, fitness_level, userId];
   try {
     const result = await pool.query(query, values);
     return result.rows[0];
@@ -52,9 +52,9 @@ export const updateWorkoutLog = async (workoutId, userId, workoutName, weight, r
 };
 
 // Delete a workout log
-export const deleteWorkoutLog = async (workoutId, userId) => {
-  const query = 'DELETE FROM workouts WHERE id = $1 AND user_id = $2;';
-  const values = [workoutId, userId];
+export const deleteStatusLog = async (StatusId, userId) => {
+  const query = 'DELETE FROM userstate WHERE id = $1 AND user_id = $2;';
+  const values = [StatusId, userId];
   try {
     await pool.query(query, values);
     return true;
@@ -63,11 +63,11 @@ export const deleteWorkoutLog = async (workoutId, userId) => {
     throw error;
   }
 };
-export const getWorkoutById = async (workoutId, userId) => {
+export const getStatusById = async (StatusId, userId) => {
   try {
-    console.log(workoutId,userId)
-    const query = `SELECT * FROM workouts WHERE id = $1 AND user_id = $2`;
-    const values = [workoutId, userId];
+    console.log(StatusId,userId)
+    const query = `SELECT * FROM userstate WHERE id = $1 AND user_id = $2`;
+    const values = [StatusId, userId];
     const result = await pool.query(query, values);
     if (result.rows.length > 0) {
       return result.rows[0];
