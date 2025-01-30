@@ -49,9 +49,6 @@
     transition: background 0.3s ease-in-out;
 }
 
-.dashboard-btn:hover {
-    /* background: linear-gradient(45deg, #feb47b, #ff7e5f); */
-}
 
 .success-message {
     color: green;
