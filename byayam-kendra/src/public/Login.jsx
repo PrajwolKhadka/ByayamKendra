@@ -1,68 +1,81 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import '../css/ByayamSignup.css';
-import VideoPlay from './Video';
+import "../css/ByayamSignup.css";
+import VideoPlay from "./Video";
 
-const Login = ({setToken}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ setAuth }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false); // To handle loading state
-  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
-
+  
     // Validate Email
     if (!email) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Email is invalid.";
     }
-
+  
     // Validate Password
     if (!password) {
       newErrors.password = "Password is required.";
     }
-
+  
     // If there are any errors, update the error state and return
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
-    setIsLoading(true); // Show loading spinner
-
-    // If no errors, proceed with the login (this can be an API call)
+  
+    setIsLoading(true);
+  
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setToken(data.token);
-        console.log("Logging in");
-        // Redirect user to protected page
-        navigate('/dashboard');
+        // Assuming the API returns token and role in response
+        localStorage.setItem("token", data.token);
+  
+        // Set user data including role
+        const userData = {
+          id: data.user.id,
+          username: data.user.username,
+          email: data.user.email,
+          role: data.user.role,  // Ensure 'role' is included
+        };
+        
+        localStorage.setItem("user", JSON.stringify(userData));
+  
+        // Update auth state with role
+        setAuth({ isAuthenticated: true, role: data.user.role });
+  
+        console.log("Logged in successfully");
+  
+        navigate(data.user.role === "admin" ? "/admindash" : "/dashboard");
       } else {
-        console.error('Login failed:', data.error);
         setErrors({ general: data.error });
       }
     } catch (err) {
-      console.error('Error:', err);
-      setErrors({ general: 'Something went wrong. Please try again.' });
+      setErrors({ general: "Something went wrong. Please try again." });
     } finally {
-      setIsLoading(false); // Hide loading spinner after request
+      setIsLoading(false);
     }
   };
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -80,12 +93,11 @@ const Login = ({setToken}) => {
       <div className="formlogin">
         <div id="formdiv-login">
           <form onSubmit={handleSubmit}>
-            {/* Email Field */}
-            <label htmlFor="E-mail">E-mail:</label><br />
+            <label htmlFor="email">E-mail:</label><br />
             <input
               type="text"
-              id="E-mail"
-              name="E-mail"
+              id="email"
+              name="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -95,12 +107,11 @@ const Login = ({setToken}) => {
             {errors.email && <span className="error-message">{errors.email}</span>}
             <br />
 
-            {/* Password Field */}
-            <label htmlFor="Password">Password:</label><br />
+            <label htmlFor="password">Password:</label><br />
             <input
               type={showPassword ? "text" : "password"}
-              id="Password"
-              name="Password"
+              id="password"
+              name="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -109,15 +120,14 @@ const Login = ({setToken}) => {
             />
             {errors.password && <span className="error-message">{errors.password}</span>}
             <br />
-            <i
-              className={`bx ${showPassword ? 'bx-show' : 'bx-hide'} eye`}
-              id="togglePassword"
-              onClick={togglePasswordVisibility}
-            ></i>
+            <i className={`bx ${showPassword ? "bx-show" : "bx-hide"} eye`} onClick={togglePasswordVisibility}></i>
+
             <button id="LoginButton" type="submit" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </button><br />
-            {errors.general && <span className="error-message-login">{errors.general}</span>}<br></br>
+              {isLoading ? "Logging in..." : "Login"}
+            </button>
+            <br />
+            {errors.general && <span className="error-message-login">{errors.general}</span>}
+            <br />
             <label className="register">New Here? </label>
             <Link to="/signup">Signup</Link>
           </form>
