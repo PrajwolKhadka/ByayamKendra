@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/ByayamDashboard.css";
-
+import { useNavigate } from 'react-router-dom';
 function Dashboard() {
     const [statusData, setStatusData] = useState(null);
     const [error, setError] = useState(null);
@@ -13,10 +13,14 @@ function Dashboard() {
     const [bmiClassification, setBmiClassification] = useState('');
     const [proteinIntake, setProteinIntake] = useState(null);
     const [saveMessage, setSaveMessage] = useState('');
-
+    const navigate =useNavigate();
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          navigate("/login"); // Redirect to login if no token is found
+        }
         fetchStatusData();
-    }, []);
+    }, [navigate]);
 
     const fetchStatusData = async () => {
         const token = localStorage.getItem('token');
