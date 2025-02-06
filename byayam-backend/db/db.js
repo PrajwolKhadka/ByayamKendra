@@ -22,7 +22,8 @@ export const createUsersTable = async () => {
         username VARCHAR(255) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        gender VARCHAR(10) NOT NULL
+        gender VARCHAR(10) NOT NULL,
+        role VARCHAR(10) NOT NULL DEFAULT 'user'
       );
     `;
     await pool.query(query);
