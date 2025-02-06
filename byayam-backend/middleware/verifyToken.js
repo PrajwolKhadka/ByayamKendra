@@ -17,5 +17,12 @@ const verifyToken = (req, res, next) => {
     res.status(403).json({ error: 'Invalid or expired token.' });
   }
 };
-
+export const authenticate = (roles)=>{
+  return (req, res, next) => {
+    if(!roles.includes(req.user.role)){
+      return res.status(403).json({error: 'Forbidden'})
+    }
+    next();
+  }
+}
 export default verifyToken;
