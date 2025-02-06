@@ -6,7 +6,7 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Signup
 export const signup = async (req, res) => {
-  const { username, email, password, gender } = req.body;
+  const { username, email, password, gender, role='user' } = req.body;
 
   try {
     console.log('Checking if user exists...');
@@ -19,7 +19,7 @@ export const signup = async (req, res) => {
 
     console.log('Creating new user...');
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await createUser(username, email, hashedPassword, gender);
+    const newUser = await createUser(username, email, hashedPassword, gender,role);
 
     console.log('User created: ', newUser);
     
@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
 
     console.log('Generating JWT...');
     const token = jwt.sign(
-      { id: newUser.id, email: newUser.email }, 
+      { id: newUser.id, email: newUser.email, role:newUser.role}, 
       jwtSecret, 
       { expiresIn: '24h' }
     );
@@ -67,7 +67,7 @@ export const login = async (req, res) => {
 
     // If the password is correct, generate a JWT token
     const token = jwt.sign(
-      { id: user.id, email: user.email }, // Make sure to use user.id and user.email
+      { id: user.id, email: user.email , role: user.role}, // Make sure to use user.id and user.email
       jwtSecret,
       { expiresIn: '24h' }
     );
@@ -75,7 +75,7 @@ export const login = async (req, res) => {
     // Send the response with user data and token
     res.status(200).json({
       message: 'Login successful',
-      user: { id: user.id, username: user.username, email: user.email },
+      user: { id: user.id, username: user.username, email: user.email ,role: user.role},
       token,
     });
 
