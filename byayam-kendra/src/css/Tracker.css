@@ -1,118 +1,118 @@
 /* Tracker.css */
 .tracker-container {
-    max-width: 100%;
-    padding: 20px;
-    /* border: 1px solid #ccc; */
-    border-radius: 10px;
-    /* background-color: #ccc; */
-    margin-top:30px;
-    display: flex;
-  }
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #2b2b2b;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
-  .tracker-container h1{
-    margin-left: 15px;
-    color: #fff;
-  }
-  .tracker-container h3{
-    color: #fff;
-  }
-  .tracker-section{
-    margin-left: 5%;
-  }
-  .upload-section {
-    margin-bottom: 20px;
-  }
-  .dropdown {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .file-input {
-    margin-bottom: 10px;
-  }
-  
-  .preview-section {
-    margin-top: 10px;
-  }
-  
-  .image-preview {
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .text-area {
-    width: 100%;
-    height: 100px;
-    margin-top: 20px;
-    margin-left: 12px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  textarea {
-    width: 554px !important;
-    height: 100px;
-    margin-bottom: 10px;
-    margin-left: 12px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: none;
-    background-color: #2b2b2b ;
-    color: #ccc;
-  }
-  .button-group-track {
-    margin-top: 20px;
-    margin-left: 15px;
-  }
-  
-  .button-track {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #992222;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 15px;
-  }
-  
-  .button-track:hover {
-    background-color: #6b1818;
-  }
-  .tracker-section-table{
-    margin-right: 25%;
-    margin-top: 10px;
-  }
-  .workout-table {
-    width: 170%;
-    margin-top: 20px;
-    background-color: #f1f1f1;
-    border-collapse: collapse;
-  }
-  
-  .workout-table th, .workout-table td {
-    padding: 5px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  .workout-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .workout-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  .workout-table button{
-    padding: 5px 10px;
-    gap: 55px;
-    color: #992222;
-  }
+.tracker-container h1,
+.tracker-container h3 {
+  color: #fff;
+  margin-bottom: 20px;
+}
 
-  
+.tracker-section {
+  flex: 1;
+  min-width: 300px;
+  margin-right: 30px;
+}
+
+.tracker-section-table {
+  flex: 2;
+  min-width: 600px;
+}
+
+.dropdown,
+.text-area,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+}
+
+.tracker-section textarea {
+  height: 100px;
+  resize: vertical;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.button-track {
+  padding: 12px 24px;
+  border-radius: 5px;
+  border: none;
+  background-color: #992222;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.button-track:hover {
+  background-color: #b92929;
+}
+
+.button-track:active {
+  transform: translateY(2px);
+}
+
+.workout-table {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #333;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.workout-table th,
+.workout-table td {
+  padding: 12px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+  color: #fff;
+}
+
+.workout-table th {
+  background-color: #222;
+  font-weight: bold;
+}
+
+.workout-table tr:last-child td {
+  border-bottom: none;
+}
+
+.workout-table button {
+  padding: 8px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.workout-table button:hover {
+  background-color: #555;
+}
+
+.error-message-tracker{
+  margin-left: 15px;
+  margin-top: 10px;
+  color: #d63131;
+}

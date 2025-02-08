@@ -6,7 +6,7 @@ export const items = [
       Day 1: Chest\n
       Day 2: Back\n
       Day 3: Rest\n
-      Day 4: Shoulders and traps\n
+      Day 4: Shoulders\n
       Day 5: Legs\n
       Day 6: Arms\n
       Day 7: Rest`,
@@ -72,7 +72,7 @@ export const items = [
         ],
       },
       {
-        day: "Day 4 SHOULDER & TRAPS",
+        day: "Day 4 SHOULDERS",
         exercises: [
           {
             name: "Shoulder Press",

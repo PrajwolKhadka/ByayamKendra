@@ -57,7 +57,7 @@ const Login = ({ setAuth }) => {
           email: data.user.email,
           role: data.user.role,  // Ensure 'role' is included
         };
-        
+  
         localStorage.setItem("user", JSON.stringify(userData));
   
         // Update auth state with role
@@ -65,7 +65,12 @@ const Login = ({ setAuth }) => {
   
         console.log("Logged in successfully");
   
-        navigate(data.user.role === "admin" ? "/admindash" : "/dashboard");
+        // Redirect based on role
+        if (data.user.role === "admin") {
+          navigate("/admindash");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
         setErrors({ general: data.error });
       }
