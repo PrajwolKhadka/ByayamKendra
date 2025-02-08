@@ -14,30 +14,24 @@ const App = () => {
   const [authToken, setAuthToken] = useState(localStorage.getItem("token")); // State to track token
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const decoded = jwtDecode(token);
-          setRole(decoded.role);
-          setAuthToken(token);
-        } catch (error) {
-          console.error("Invalid token:", error);
-          localStorage.removeItem("token");
-          setRole(null);
-          setAuthToken(null);
-        }
-      } else {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setRole(decoded.role);
+        setAuthToken(token);
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("token");
         setRole(null);
         setAuthToken(null);
       }
-    };
-
-    window.addEventListener("storage", handleStorageChange); // Listen for localStorage changes
-    handleStorageChange(); // Check token on mount
-
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+    } else {
+      setRole(null);
+      setAuthToken(null);
+    }
+  }, [authToken]); // Depend on authToken so it updates immediately
+  
 
   return (
     <Router>

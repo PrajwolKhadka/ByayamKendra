@@ -47,7 +47,6 @@ const Login = ({ setAuth }) => {
       const data = await response.json();
   
       if (response.ok) {
-        // Assuming the API returns token and role in response
         localStorage.setItem("token", data.token);
   
         // Set user data including role
@@ -55,13 +54,15 @@ const Login = ({ setAuth }) => {
           id: data.user.id,
           username: data.user.username,
           email: data.user.email,
-          role: data.user.role,  // Ensure 'role' is included
+          role: data.user.role, 
         };
   
         localStorage.setItem("user", JSON.stringify(userData));
   
-        // Update auth state with role
-        setAuth({ isAuthenticated: true, role: data.user.role });
+        //  role and token bata auth state update garne
+        setAuth({role: data.user.role });
+        setAuthToken(data.token);
+
   
         console.log("Logged in successfully");
   
