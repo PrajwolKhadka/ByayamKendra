@@ -28,7 +28,7 @@ const AdminSidebar = () => {
                             <Link to="/admin/messages">Messages</Link>
                         </li>
                         <li className={location.pathname === "/admin/accounts" ? "active" : ""}>
-                            <Link to="/admin/accounts">Accounts</Link>
+                            <Link to="/accounts">Accounts</Link>
                         </li>
                         <li>
                             <button className="logout-btn" onClick={handleLogout}>Logout</button>
