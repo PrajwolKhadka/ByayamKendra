@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { createUser, findUserByEmail, findUserByEmailOrUsername } from '../model/userModel.js';
+import { createUser, findUserByEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Signup
@@ -85,3 +85,39 @@ export const login = async (req, res) => {
   }
 };
 
+export const getAllUser = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    res.json(users);
+    console.log(users);
+  } catch (error) {
+    
+    res.status(500).json({ error: 'Error fetching users' });
+  }
+};
+
+export const updateUsers  = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedUser  = await updateUser (id, req.body);
+    if (!updatedUser ) {
+      return res.status(404).json({ error: 'User  not found' });
+    }
+    res.json(updatedUser );
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating user' });
+  }
+};
+
+export const deleteUsers  = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedUser  = await deleteUser (id);
+    if (!deletedUser ) {
+      return res.status(404).json({ error: 'User  not found' });
+    }
+    res.json({ message: 'User  deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error deleting user' });
+  }
+};
