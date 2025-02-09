@@ -22,7 +22,7 @@ const AdminSidebar = () => {
                             <Link to="/admindash">Dashboard</Link>
                         </li>
                         <li className={location.pathname === "/admin/workout" ? "active" : ""}>
-                            <Link to="/admin/workout">Workout</Link>
+                            <Link to="/workoutadd">Workout</Link>
                         </li>
                         <li className={location.pathname === "/admin/messages" ? "active" : ""}>
                             <Link to="/admin/messages">Messages</Link>

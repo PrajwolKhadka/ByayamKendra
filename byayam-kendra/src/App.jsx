@@ -57,6 +57,9 @@ const App = () => {
               <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
                 <Route path="/accounts" element={<Admin />} />
               </Route>
+              <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+                <Route path="/workoutadd" element={<Admin />} />
+              </Route>
             </>
           ) : (
             <Route path="*" element={<Navigate to="/login" />} />

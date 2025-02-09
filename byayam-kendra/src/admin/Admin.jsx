@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 const Dash = lazy(() => import("./AdminDashboard.jsx"));
 const Sidebar= lazy(()=>import("./Sidebar.jsx"))
 const Accounts= lazy(()=>import("./AccManagement.jsx"))
+const Workout= lazy(()=>import("./WorkoutAdd.jsx"))
 const Admin = () => {
     const location = useLocation();
     const navigate = useNavigate();
    const routeComponents = {
        '/admindash': <Dash/>,
-    //    '/tracker': <Tracker />,
+       '/workoutadd': <Workout />,
     //    '/suggest': <Suggest />,
        '/accounts': <Accounts/>,
      };
