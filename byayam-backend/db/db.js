@@ -72,4 +72,28 @@ export const createUserStateTable = async () => {
   }
 }
 
+export const createAdminWorkoutTable=async()=>{
+  try{
+    const query = `CREATE TABLE IF NOT EXISTS adminworkouts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    min_age INT NOT NULL,
+    max_age INT NOT NULL,
+    min_weight DECIMAL NOT NULL,
+    max_weight DECIMAL NOT NULL,
+    min_height DECIMAL NOT NULL,
+    max_height DECIMAL NOT NULL,
+    fitness_level VARCHAR(50) NOT NULL,
+    image_url VARCHAR(255),  -- Assuming you will store the image URL after uploading
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`;
+await pool.query(query);
+console.log("Workout Add table is ready");
+}catch (err){
+  console.error("Error creating status table", err);
+}
+
+}
+
 export { pool };
