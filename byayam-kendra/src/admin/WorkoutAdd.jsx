@@ -30,21 +30,52 @@ const WorkoutForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Workout to be submitted:', workout);
-    setWorkout({
-      name: '',
-      description: '',
-      minAge: '',
-      maxAge: '',
-      minWeight: '',
-      maxWeight: '',
-      minHeight: '',
-      maxHeight: '',
-      fitnessLevel: '',
-      imageFile: null
-    });
+    const formData = new FormData();
+    formData.append('name', workout.name);
+    formData.append('description', workout.description);
+    formData.append('minAge', workout.minAge);
+    formData.append('maxAge', workout.maxAge);
+    formData.append('minWeight', workout.minWeight);
+    formData.append('maxWeight', workout.maxWeight);
+    formData.append('minHeight', workout.minHeight);
+    formData.append('maxHeight', workout.maxHeight);
+    formData.append('fitnessLevel', workout.fitnessLevel);
+    formData.append('imageFile', workout.imageFile); // Append the image file
+    console.log("hehe",formData);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3000/api/protected/admin/adminworkouts', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to add workout');
+      }
+  
+      const data = await response.json();
+      console.log('Workout added:', data);
+      // Reset form state
+      setWorkout({
+        name: '',
+        description: '',
+        minAge: '',
+        maxAge: '',
+        minWeight: '',
+        maxWeight: '',
+        minHeight: '',
+        maxHeight: '',
+        fitnessLevel: '',
+        imageFile: null
+      });
+    } catch (error) {
+      console.error('Error adding workout:', error);
+    }
   };
 
   return (
@@ -74,22 +105,22 @@ const WorkoutForm = () => {
 
         <div className="form-row-workout">
           <div className="form-group-workout">
-            <label htmlFor="minWeight">Min Weight (lbs):</label>
+            <label htmlFor="minWeight">Min Weight (kg):</label>
             <input type="number" id="minWeight" name="minWeight" value={workout.minWeight} onChange={handleChange} required />
           </div>
           <div className="form-group-workout">
-            <label htmlFor="maxWeight">Max Weight (lbs):</label>
+            <label htmlFor="maxWeight">Max Weight (kg):</label>
             <input type="number" id="maxWeight" name="maxWeight" value={workout.maxWeight} onChange={handleChange} required />
           </div>
         </div>
 
         <div className="form-row-workout">
           <div className="form-group-workout">
-            <label htmlFor="minHeight">Min Height (cm):</label>
+            <label htmlFor="minHeight">Min Height (foot):</label>
             <input type="number" id="minHeight" name="minHeight" value={workout.minHeight} onChange={handleChange} required />
           </div>
           <div className="form-group-workout">
-            <label htmlFor="maxHeight">Max Height (cm):</label>
+            <label htmlFor="maxHeight">Max Height (foot):</label>
             <input type="number" id="maxHeight" name="maxHeight" value={workout.maxHeight} onChange={handleChange} required />
           </div>
         </div>

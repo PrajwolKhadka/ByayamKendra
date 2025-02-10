@@ -15,19 +15,16 @@ const Login = ({ setAuth }) => {
     e.preventDefault();
     const newErrors = {};
   
-    // Validate Email
     if (!email) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Email is invalid.";
     }
   
-    // Validate Password
     if (!password) {
       newErrors.password = "Password is required.";
     }
   
-    // If there are any errors, update the error state and return
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -48,30 +45,15 @@ const Login = ({ setAuth }) => {
   
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
   
-        // Set user data including role
-        const userData = {
-          id: data.user.id,
-          username: data.user.username,
-          email: data.user.email,
-          role: data.user.role, 
-        };
-  
-        localStorage.setItem("user", JSON.stringify(userData));
-  
-        //  role and token bata auth state update garne
-        setAuth({role: data.user.role });
-        setAuthToken(data.token);
-
+        // Notify `App.jsx` to update state immediately
+        window.dispatchEvent(new Event("tokenUpdated"));
   
         console.log("Logged in successfully");
   
-        // Redirect based on role
-        if (data.user.role === "admin") {
-          navigate("/admindash");
-        } else {
-          navigate("/dashboard");
-        }
+        // Redirect immediately
+        navigate(data.user.role === "admin" ? "/admindash" : "/dashboard");
       } else {
         setErrors({ general: data.error });
       }
@@ -81,6 +63,7 @@ const Login = ({ setAuth }) => {
       setIsLoading(false);
     }
   };
+  
   
 
   const togglePasswordVisibility = () => {

@@ -90,7 +90,7 @@ const WorkoutGenerator = () => {
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
-                <input value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Enter Your Height in foot (eg. 5'1)" required />
+                <input value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Enter Your Height in cm" required />
                 <input 
                     type="number" 
                      value={weight} 
