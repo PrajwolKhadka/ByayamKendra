@@ -43,7 +43,6 @@ const WorkoutForm = () => {
     formData.append('maxHeight', workout.maxHeight);
     formData.append('fitnessLevel', workout.fitnessLevel);
     formData.append('imageFile', workout.imageFile); // Append the image file
-    console.log("hehe",formData);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:3000/api/protected/admin/adminworkouts', {
