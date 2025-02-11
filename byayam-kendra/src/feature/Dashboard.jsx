@@ -62,23 +62,23 @@ function Dashboard() {
 
     const classifyBMI = (bmiValue) => {
         if (bmiValue < 16) {
-            return 'Severe Thinness';
+          return 'Severe Thinness';
         } else if (bmiValue >= 16 && bmiValue < 17) {
-            return 'Moderate Thinness';
+          return 'Moderate Thinness';
         } else if (bmiValue >= 17 && bmiValue < 18.5) {
-            return 'Mild Thinness';
-        }  else if (bmiValue >= 18.5 && bmiValue < 25 ) {
-            return 'Normal';
-        }  else if (bmiValue >= 25 && bmiValue <= 30) {
-            return 'OverWeight';
-        }  else if (bmiValue > 30 && bmiValue <=40) {
-            return 'Obese';
-        }  else if (bmiValue >40) {
-            return 'Obese Class III';
+          return 'Mild Thinness';
+        } else if (bmiValue >= 18.5 && bmiValue < 25) {
+          return 'Normal';
+        } else if (bmiValue >= 25 && bmiValue < 30) {
+          return 'Overweight';
+        } else if (bmiValue >= 30 && bmiValue < 35) {
+          return 'Obese Class I';
+        } else if (bmiValue >= 35 && bmiValue < 40) {
+          return 'Obese Class II';
         } else {
-            return 'Bad';
+          return 'Obese Class III';
         }
-    };
+      };
 
     const calculateProteinIntake = () => {
         if (weight) {
