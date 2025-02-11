@@ -34,20 +34,34 @@ export const findUserByEmail = async (email) => {
 };
 
 export const getAllUsers = async () => {
-  try{
-  const result = await pool.query('SELECT * FROM users');
-  return result.rows;
+  try {
+    const result = await pool.query('SELECT id, username, email, gender, role FROM users');
+    return result.rows;
   } catch (error) {
     console.error('Error fetching all users:', error);
+    throw error;
   }
 };
 
-export const updateUser  = async (id, userData) => {
-  const { username, email, password, gender, role } = userData;
-  const result = await pool.query(
-    'UPDATE users SET username = $1, email = $2, password = $3, gender = $4, role = $5 WHERE id = $6 RETURNING *',
-    [username, email, password, gender, role, id]
-  );
+// In userModel.js
+export const updateUser = async (id, userData) => {
+  const fields = [];
+  const values = [];
+  let paramIndex = 1;
+
+  Object.entries(userData).forEach(([key, value]) => {
+    if (value !== undefined) {
+      fields.push(`${key} = $${paramIndex}`);
+      values.push(value);
+      paramIndex++;
+    }
+  });
+
+  if (fields.length === 0) throw new Error("No fields to update");
+
+  values.push(id);
+  const query = `UPDATE users SET ${fields.join(', ')} WHERE id = $${paramIndex} RETURNING *`;
+  const result = await pool.query(query, values);
   return result.rows[0];
 };
 

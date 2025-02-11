@@ -30,10 +30,16 @@ const UserManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      const dataToSend = { ...formData };
+
+      if (editingUserId && dataToSend.password === "") {
+        delete dataToSend.password;
+      }
+
       if (editingUserId) {
-        await axios.put(`http://localhost:3000/api/auth/users/${editingUserId}`, formData)
+        await axios.put(`http://localhost:3000/api/auth/users/${editingUserId}`, dataToSend)
       } else {
-        await axios.post("http://localhost:3000/api/auth/signup", formData)
+        await axios.post("http://localhost:3000/api/auth/signup", dataToSend)
       }
       setFormData({ username: "", email: "", password: "", gender: "", role: "user" })
       setEditingUserId(null)
@@ -45,7 +51,7 @@ const UserManagement = () => {
   }
 
   const handleEdit = (user) => {
-    setFormData({ username: user.username, email: user.email, password: "", gender: user.gender, role: user.role })
+    setFormData({ username: user.username, email: user.email, password:"", gender: user.gender, role: user.role })
     setEditingUserId(user.id)
   }
 
@@ -79,8 +85,8 @@ const UserManagement = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Password"
-            required
+            placeholder={editingUserId ? "New Password (optional)" : "Password"}
+            required={!editingUserId} 
           />
           <select name="gender" value={formData.gender} onChange={handleChange} required>
             <option value="">Select Gender</option>

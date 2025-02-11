@@ -96,18 +96,28 @@ export const getAllUser = async (req, res) => {
   }
 };
 
-export const updateUsers  = async (req, res) => {
+export const updateUsers = async (req, res) => {
   const { id } = req.params;
+  let updateData = { ...req.body };
+
   try {
-    const updatedUser  = await updateUser (id, req.body);
-    if (!updatedUser ) {
-      return res.status(404).json({ error: 'User  not found' });
+    // If the request includes a password, hash it before updating
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
     }
-    res.json(updatedUser );
+
+    const updatedUser = await updateUser(id, updateData);
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(updatedUser);
   } catch (error) {
+    console.error('Error updating user:', error);
     res.status(500).json({ error: 'Error updating user' });
   }
 };
+
 
 export const deleteUsers  = async (req, res) => {
   const { id } = req.params;
