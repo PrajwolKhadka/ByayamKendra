@@ -5,13 +5,14 @@ const Dash = lazy(() => import("./AdminDashboard.jsx"));
 const Sidebar= lazy(()=>import("./Sidebar.jsx"))
 const Accounts= lazy(()=>import("./AccManagement.jsx"))
 const Workout= lazy(()=>import("./WorkoutAdd.jsx"))
+const ViewWorkout= lazy(()=>import("./Workouts.jsx"))
 const Admin = () => {
     const location = useLocation();
     const navigate = useNavigate();
    const routeComponents = {
        '/admindash': <Dash/>,
        '/workoutadd': <Workout />,
-    //    '/suggest': <Suggest />,
+        '/workoutview':<ViewWorkout/>,
        '/accounts': <Accounts/>,
      };
    

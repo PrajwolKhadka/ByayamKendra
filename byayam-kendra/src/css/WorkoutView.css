@@ -1,0 +1,78 @@
+/* General Styles */
+.workout-container-view {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .workout-list-view {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .workout-item-view {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .workout-item-view h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .workout-item-view p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .workout-item-view img {
+    border-radius: 8px;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 150px;
+    margin-bottom: 15px;
+  }
+  
+  .workout-item-view button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .workout-item-view button:hover {
+    background-color: #45a049;
+  }
+  
+  .workout-item-view button:nth-child(2) {
+    background-color: #f44336;
+  }
+  
+  .workout-item-view button:nth-child(2):hover {
+    background-color: #e53935;
+  }
+  
+  .workout-item-view button:focus {
+    outline: none;
+  }
+  
+  /* Container styling for the buttons */
+  .workout-actions-view {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
