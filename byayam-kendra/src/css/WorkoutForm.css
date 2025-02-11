@@ -1,71 +1,168 @@
-.workout-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .workout-form-container h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .workout-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .form-group-workout {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-row-workout {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .form-row-workout .form-group-workout{
-    flex: 1;
-  }
-  
-  .workout-form-container label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .workout-form-container input,
-  .workout-form-container textarea,
-  .workout-form-container select {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .workout-form-container textarea {
-    height: 100px;
-    resize: none;
-  }
-  
-  .submit-btn {
-    background-color: #992222;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-btn:hover {
-    background-color: #4b1014;
-  }
-  
-  
+.card-workoutadmin {
+  width: calc(100% - 250px); /* Adjust 250px to match your sidebar width */
+  max-width: 650px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header-workoutadmin {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.card-title-workoutadmin {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.card-content-workoutadmin {
+  padding: 20px;
+}
+
+.workout-form-workoutadmin {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+}
+
+.form-group-workoutadmin {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row-workoutadmin {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row-workoutadmin .form-group-workoutadmin {
+  flex: 1;
+}
+
+.form-group-workoutadmin label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group-workoutadmin input[type="text"],
+.form-group-workoutadmin input[type="number"],
+.form-group-workoutadmin select,
+.form-group-workoutadmin .quill {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.form-group-workoutadmin select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+.hidden-file-input-workoutadmin {
+  display: none;
+}
+
+.file-input-wrapper-workoutadmin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-input-button-workoutadmin {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.file-input-button-workoutadmin:hover {
+  background-color: #2563eb;
+}
+
+.file-name-workoutadmin {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.image-preview-workoutadmin {
+  margin-top: 10px;
+}
+
+.image-preview-workoutadmin img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.submit-button-workoutadmin {
+  width: 100%;
+  max-width: 300px;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  align-self: center;
+}
+
+.submit-button-workoutadmin:hover {
+  background-color: #2563eb;
+}
+
+/* Quill editor styles */
+.form-group-workoutadmin .quill {
+  background-color: #fff;
+  width: 100%;
+}
+
+.form-group-workoutadmin .ql-toolbar {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.form-group-workoutadmin .ql-container {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  min-height: 120px;
+}
+
+.form-group-workoutadmin .quill .ql-editor {
+  min-height: 120px;
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9fafb;
+}
+
