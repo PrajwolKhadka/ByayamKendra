@@ -1,0 +1,70 @@
+.workout-generator-generate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content-generate {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form-container-generate {
+    width: 45%;
+}
+
+.workout-list-container-generate {
+    width: 45%;
+}
+
+.workout-list-generate {
+    list-style: none;
+    padding: 0;
+}
+
+.workout-item-generate {
+    margin-bottom: 20px;
+}
+
+.input-generate, .select-generate, .button-generate {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.status-item-generate {
+    margin-bottom: 15px;
+}
+
+.status-item-generate button {
+    margin-top: 10px;
+}
+
+.workout-image-generate {
+    width: 100%;
+    height: auto;
+}
+
+.workout-description-generate {
+    margin-top: 10px;
+}
+
+.title-generate {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.button-generate {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.button-generate:hover {
+    background-color: #45a049;
+}
