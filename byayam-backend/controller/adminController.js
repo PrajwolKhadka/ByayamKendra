@@ -84,3 +84,20 @@ export const getAllAdminWorkoutsController = async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve workouts' });
   }
 };
+
+import { getWorkoutsByUserStatus } from '../model/adminModel.js';
+
+export const fetchUserWorkouts = async (req, res) => {
+    try {
+        const { age, weight, height, fitness_level } = req.query;
+
+        if (!age || !weight || !height || !fitness_level) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const workouts = await getWorkoutsByUserStatus({ age, weight, height, fitness_level });
+        res.json({ workouts });
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching workouts" });
+    }
+};
