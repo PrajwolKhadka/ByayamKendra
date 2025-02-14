@@ -109,3 +109,23 @@ export const getAdminWorkoutById = async (id) => {
     throw error;
   }
 };
+
+export const getWorkoutsByUserStatus = async ({ age, weight, height, fitness_level }) => {
+  const query = `
+       SELECT * FROM adminworkouts 
+        WHERE min_age <= $1::integer AND max_age >= $1::integer
+        AND min_weight <= $2::decimal AND max_weight >= $2::decimal
+        AND min_height <= $3::decimal AND max_height >= $3::decimal
+        AND fitness_level = $4;
+  `;
+
+  const values = [age, weight, height, fitness_level];
+
+  try {
+      const result = await pool.query(query, values);
+      return result.rows;
+  } catch (error) {
+      console.error('Error fetching workouts:', error);
+      throw error;
+  }
+};
