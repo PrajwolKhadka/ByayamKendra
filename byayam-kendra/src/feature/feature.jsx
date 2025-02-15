@@ -6,7 +6,6 @@ const Dashboard = React.lazy(() => import("./Dashboard.jsx"));
 const Tracker = React.lazy(() => import("./Tracker.jsx"));
 const Suggest = React.lazy(() => import("./Suggestion.jsx"));
 const Generator = React.lazy(() => import("./Generator.jsx"));
-
 const Feature = () => {
   const location = useLocation();
   const navigate = useNavigate();

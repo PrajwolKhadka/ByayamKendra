@@ -96,4 +96,5 @@ console.log("Workout Add table is ready");
 
 }
 
+
 export { pool };
