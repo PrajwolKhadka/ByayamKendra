@@ -146,7 +146,7 @@ const WorkoutGenerator = () => {
                             {statusLogs.length > 0 ? (
                                 statusLogs.map((userstate, index) => (
                                     <li className="status-item-generate" key={index}>
-                                        <h2>{userstate.age}</h2>
+                                        <p>{userstate.age}</p>
                                         <p>{userstate.height}</p>
                                         <p>{userstate.weight}</p>
                                         <p>{userstate.gender}</p>

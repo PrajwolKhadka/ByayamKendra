@@ -80,6 +80,7 @@ const App = () => {
             <Route path="/tracker" element={<Feature />} />
             <Route path="/suggest" element={<Feature />} />
             <Route path="/generate" element={<Feature />} />
+            <Route path="/contact" element={<Feature />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
             <Route path="/admindash" element={<Admin />} />

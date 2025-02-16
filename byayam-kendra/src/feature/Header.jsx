@@ -75,7 +75,7 @@ function Header() {
                     <Link to="/tracker" className="w3-bar-item w3-button" onClick={closeSidebar}>
                         Tracker
                     </Link>
-                    <Link to="/dashboard" className="w3-bar-item w3-button" onClick={closeSidebar}>
+                    <Link to="/contact" className="w3-bar-item w3-button" onClick={closeSidebar}>
                         Contact Us
                     </Link>
                 </div>
