@@ -97,7 +97,7 @@ console.log("Workout Add table is ready");
 }
 export const createAdminChallengeTable=async()=>{
   try{
-    const query = `CREATE TABLE challenges (
+    const query = `CREATE TABLE IF NOT EXISTS challenges (
   id SERIAL PRIMARY KEY,
   challenge_text VARCHAR(255) NOT NULL
 );`;
