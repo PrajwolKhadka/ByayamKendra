@@ -35,7 +35,7 @@ export const findUserByEmail = async (email) => {
 
 export const getAllUsers = async () => {
   try {
-    const result = await pool.query('SELECT id, username, email, gender, role FROM users');
+    const result = await pool.query('SELECT id, username, email, gender, role FROM users WHERE role != $1', ['admin']);
     return result.rows;
   } catch (error) {
     console.error('Error fetching all users:', error);

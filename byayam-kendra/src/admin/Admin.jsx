@@ -6,6 +6,7 @@ const Sidebar= lazy(()=>import("./Sidebar.jsx"))
 const Accounts= lazy(()=>import("./AccManagement.jsx"))
 const Workout= lazy(()=>import("./WorkoutAdd.jsx"))
 const ViewWorkout= lazy(()=>import("./Workouts.jsx"))
+const Challenges= lazy(()=>import("./Challenges.jsx"))
 const Admin = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Admin = () => {
        '/workoutadd': <Workout />,
         '/workoutview':<ViewWorkout/>,
        '/accounts': <Accounts/>,
+       '/challenges': <Challenges/>,
      };
    
      return (

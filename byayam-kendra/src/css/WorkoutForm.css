@@ -1,168 +1,115 @@
+/* WorkoutForm.css */
+
+/* Card container for the workout form */
 .card-workoutadmin {
-  width: calc(100% - 250px); /* Adjust 250px to match your sidebar width */
-  max-width: 650px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  color: #333;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
 }
 
+/* Card header for the workout form title */
 .card-header-workoutadmin {
-  padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .card-title-workoutadmin {
   font-size: 24px;
   font-weight: bold;
-  text-align: center;
-  margin: 0;
+  color: #333;
 }
 
+/* Form styling */
 .card-content-workoutadmin {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .workout-form-workoutadmin {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  width: 100%;
-  max-width: 600px;
-  align-items: center;
+  gap: 15px;
 }
 
+/* Input fields and labels */
 .form-group-workoutadmin {
   display: flex;
   flex-direction: column;
 }
 
-.form-row-workoutadmin {
-  display: flex;
-  gap: 20px;
-}
-
-.form-row-workoutadmin .form-group-workoutadmin {
-  flex: 1;
-}
-
-.form-group-workoutadmin label {
+label {
   font-size: 14px;
-  font-weight: 500;
+  color: #555;
   margin-bottom: 5px;
 }
 
-.form-group-workoutadmin input[type="text"],
-.form-group-workoutadmin input[type="number"],
-.form-group-workoutadmin select,
-.form-group-workoutadmin .quill {
-  width: 100%;
-  padding: 8px 12px;
+input,
+select,
+textarea {
+  padding: 10px;
   font-size: 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
 }
 
-.form-group-workoutadmin select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-  background-position: right 0.5rem center;
-  background-repeat: no-repeat;
-  background-size: 1.5em 1.5em;
-  padding-right: 2.5rem;
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #5f9ea0;
 }
 
-.hidden-file-input-workoutadmin {
-  display: none;
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
-.file-input-wrapper-workoutadmin {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Styling for file input */
+input[type="file"] {
+  padding: 5px;
 }
 
-.file-input-button-workoutadmin {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  background-color: #3b82f6;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.file-input-button-workoutadmin:hover {
-  background-color: #2563eb;
-}
-
-.file-name-workoutadmin {
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.image-preview-workoutadmin {
+/* Image preview */
+img {
   margin-top: 10px;
+  border-radius: 5px;
+  max-width: 100px;
 }
 
-.image-preview-workoutadmin img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
+/* Submit button */
 .submit-button-workoutadmin {
-  width: 100%;
-  max-width: 300px;
-  padding: 14px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #3b82f6;
+  background-color: #5f9ea0;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-  align-self: center;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button-workoutadmin:hover {
-  background-color: #2563eb;
+  background-color: #4c8c7f;
 }
 
-/* Quill editor styles */
-.form-group-workoutadmin .quill {
-  background-color: #fff;
-  width: 100%;
-}
+/* Responsive design */
+@media (max-width: 768px) {
+  .card-workoutadmin {
+    padding: 15px;
+  }
 
-.form-group-workoutadmin .ql-toolbar {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
+  .workout-form-workoutadmin {
+    gap: 10px;
+  }
 
-.form-group-workoutadmin .ql-container {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  min-height: 120px;
+  .form-group-workoutadmin {
+    width: 100%;
+  }
 }
-
-.form-group-workoutadmin .quill .ql-editor {
-  min-height: 120px;
-  padding: 12px;
-  font-size: 16px;
-  color: #333;
-  background-color: #f9fafb;
-}
-

@@ -87,6 +87,7 @@ const App = () => {
             <Route path="/accounts" element={<Admin />} />
             <Route path="/workoutadd" element={<Admin />} />
             <Route path="/workoutview" element={<Admin />} />
+            <Route path="/challenges" element={<Admin />} />
           </Route>
 
           {/* Catch-all for unauthenticated access */}
