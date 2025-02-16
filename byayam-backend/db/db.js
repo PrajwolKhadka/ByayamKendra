@@ -95,6 +95,19 @@ console.log("Workout Add table is ready");
 }
 
 }
+export const createAdminChallengeTable=async()=>{
+  try{
+    const query = `CREATE TABLE challenges (
+  id SERIAL PRIMARY KEY,
+  challenge_text VARCHAR(255) NOT NULL
+);`;
+await pool.query(query);
+console.log("Challenge table is ready");
+}catch (err){
+  console.error("Error creating Challenge table", err);
+}
+
+}
 
 
 export { pool };
