@@ -89,113 +89,122 @@ function Dashboard() {
     };
 
     const calculateBMI = () => {
-        const heightInMeters = (parseInt(feet) * 0.3048) + (parseInt(inches) * 0.0254);
-        const weightInKg = parseInt(weight);
-        const calculatedBmi = (weightInKg / (heightInMeters * heightInMeters)).toFixed(2);
-        setBmi(calculatedBmi);
-    
-        // WHO BMI Classification Logic with more detailed categories
-        if (calculatedBmi < 16) {
-            setBmiClassification("Severe Thinness");
-        } else if (calculatedBmi >= 16 && calculatedBmi <= 16.9) {
-            setBmiClassification("Moderate Thinness");
-        } else if (calculatedBmi >= 17 && calculatedBmi <= 18.4) {
-            setBmiClassification("Mild Thinness");
-        } else if (calculatedBmi >= 18.5 && calculatedBmi <= 24.9) {
-            setBmiClassification("Normal weight");
-        } else if (calculatedBmi >= 25 && calculatedBmi <= 29.9) {
-            setBmiClassification("Overweight");
-        } else if (calculatedBmi >= 30 && calculatedBmi <= 34.9) {
-            setBmiClassification("Obesity Class 1");
-        } else if (calculatedBmi >= 35 && calculatedBmi <= 39.9) {
-            setBmiClassification("Obesity Class 2");
-        } else {
-            setBmiClassification("Obesity Class 3");
-        }
-    };
-    
-
-    const calculateProteinIntake = () => {
-        if (!bmi) return;
+        const feetValue = parseFloat(feet) || 0;
+        const inchesValue = parseFloat(inches) || 0;
+        const weightValue = parseFloat(weight) || 0;
         
-        const weightInKg = parseInt(weight);
-        let protein = 0;
-        if (bmi < 18.5) {
-            protein = (1.2 * weightInKg).toFixed(2); // Underweight
-        } else if (bmi >= 18.5 && bmi <= 24.9) {
-            protein = (1.6 * weightInKg).toFixed(2); // Normal weight
-        } else if (bmi >= 25 && bmi <= 29.9) {
-            protein = (2.0 * weightInKg).toFixed(2); // Overweight
-        } else {
-            protein = (2.2 * weightInKg).toFixed(2); // Obesity
+        const heightInMeters = feetValue * 0.3048 + inchesValue * 0.0254;
+        if (heightInMeters <= 0 || weightValue <= 0) {
+          setBmi(null);
+          setBmiClassification("");
+          return null;
         }
-    
-        setProteinIntake(protein); // Set the calculated protein intake correctly
-    };
-    
-
-    const handleCalculate = () => {
-        calculateBMI(); // Calculate BMI first
-        calculateProteinIntake(); // Then calculate protein intake
-    };
+        
+        const calculatedBmi = (weightValue / (heightInMeters ** 2)).toFixed(2);
+        setBmi(calculatedBmi);
+        
+        // Set BMI classification
+        if (calculatedBmi < 16) setBmiClassification("Severe Thinness");
+        else if (calculatedBmi < 17) setBmiClassification("Moderate Thinness");
+        else if (calculatedBmi < 18.5) setBmiClassification("Mild Thinness");
+        else if (calculatedBmi < 25) setBmiClassification("Normal weight");
+        else if (calculatedBmi < 30) setBmiClassification("Overweight");
+        else if (calculatedBmi < 35) setBmiClassification("Obesity Class 1");
+        else if (calculatedBmi < 40) setBmiClassification("Obesity Class 2");
+        else setBmiClassification("Obesity Class 3");
+        
+        return calculatedBmi; // Return the calculated BMI
+      };
+      
+      const calculateProteinIntake = (bmiValue) => {
+        const weightValue = parseFloat(weight) || 0;
+        if (!bmiValue || weightValue <= 0) {
+          setProteinIntake(null);
+          return;
+        }
+      
+        let protein;
+        if (bmiValue < 18.5) protein = weightValue * 1.2;
+        else if (bmiValue < 25) protein = weightValue * 1.6;
+        else if (bmiValue < 30) protein = weightValue * 2.0;
+        else protein = weightValue * 2.2;
+        
+        setProteinIntake(protein.toFixed(2));
+      };
+      
+      const handleCalculate = () => {
+        const newBmi = calculateBMI(); // Get the latest BMI
+        calculateProteinIntake(newBmi); // Pass it directly
+      };
 
     return (
+        <div className="dashboard-wrapper">
         <div className="dashboard-container">
             {/* Workout Generator */}
             <div className="dashboard-card">
-                <h2>Workout Generator</h2>
-                <p>Get personalized workouts based on your body index!</p>
-                <Link to="/generate" className="dashboard-btn">Generate Workout</Link>
+                <h2 className="dashboard-card__title">Workout Generator</h2>
+                <p className="dashboard-card__text">Get personalized workouts based on your body index!</p>
+                <Link to="/generate" className="dashboard-card__btn">Generate Workout</Link>
             </div>
 
             {/* BMI Index */}
             <div className="dashboard-card">
-                <h2>BMI Index</h2>
-                <input
-                    type="number"
-                    placeholder="Age"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
+                <h2 className="dashboard-card__title">BMI Index</h2>
+                <input 
+                    type="number" 
+                    placeholder="Age" 
+                    min="0"
+                    value={age} 
+                    onChange={(e) => setAge(e.target.value)} 
+                    />
+                <input 
+                    type="number" 
+                    placeholder="Weight (kg)" 
+                    min="0"
+                    value={weight} 
+                    onChange={(e) => setWeight(e.target.value)} 
                 />
-                <input
-                    type="number"
-                    placeholder="Weight (kg)"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
+                <input 
+                    type="number" 
+                    placeholder="Feet" 
+                    min="0"
+                    value={feet} 
+                    onChange={(e) => setFeet(e.target.value)} 
                 />
-                <input
-                    type="number"
-                    placeholder="Feet"
-                    value={feet}
-                    onChange={(e) => setFeet(e.target.value)}
+                <input 
+                    type="number" 
+                    placeholder="Inches" 
+                    min="0" 
+                    max="11"
+                    value={inches} 
+                    onChange={(e) => setInches(e.target.value)} 
                 />
-                <input
-                    type="number"
-                    placeholder="Inches"
-                    value={inches}
-                    onChange={(e) => setInches(e.target.value)}
-                />
-                <button className="dashboard-btn" onClick={handleCalculate}>Calculate BMI & Protein Intake</button>
-                {bmi && <p>Your BMI: {bmi}</p>}
-                {bmiClassification && <p>BMI Classification: {bmiClassification}</p>}
+                <button className="dashboard-card__btn_bmi" onClick={handleCalculate}>Calculate BMI & Protein Intake</button>
+                {bmi && <p className="dashboard-card__result"> Your BMI: {bmi}</p>}
+                {bmiClassification && <p className="dashboard-card__highlight">BMI Classification: {bmiClassification}</p>}
             </div>
 
             {/* Protein Intake */}
             <div className="dashboard-card">
-                <h2>Protein Intake</h2>
-                {proteinIntake && <p>Recommended Protein Intake: <strong>{proteinIntake} grams</strong></p>}
-                <p>Your average Protein Intake according to your BMI will be generated.<br />Keep a note that the recommended protein intake may vary upon individual factors.</p>
+                <h2  className="dashboard-card__title">Protein Intake</h2>
+                <p className="dashboard-card__result">Recommended Protein Intake: <strong>{proteinIntake} grams</strong></p>
+                <p className="dashboard-card__result">Your average Protein Intake according to your BMI will be generated.<br />Keep a note that the recommended protein intake may vary upon individual factors.</p>
             </div>
 
             {/* Daily Challenge (User) */}
-            <div className="dashboard-card">
-                <h2>Today's Challenge</h2>
+            <div className="dashboard-card dashboard-card--challenge">
+                <h2 className="dashboard-card__title">Today's Challenge</h2>
                 {dailyChallenge ? (
-                    <p>{dailyChallenge.challenge_text}</p>
+                    <p className="dashboard-card__text_ch">💪🏼{dailyChallenge.challenge_text}🏋️‍♂️</p>
                 ) : (
-                    <p>Loading today's challenge...</p>
+                    <p className="dashboard-card__text_ch">Loading today's challenge...</p>
                 )}
+                <p className="dashboard-card__text">ByayamKendra Team will provide you with a daily challenge to help you stay on track with your fitness goals.
+                    These challenges may not be based on your fitness level, age, and other factors but will be helpful to boost your motivation 
+                    and stay consistent.<br/>
+                    To keep the track of your daily challenges, Keep Track via <Link to="/tracker" className='dashboard-card_link'>Byayam Tracker</Link>.</p>
             </div>
+        </div>
         </div>
     );
 }

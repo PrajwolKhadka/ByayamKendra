@@ -1,62 +1,154 @@
+.dashboard-wrapper {
+    background-color: #333;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
 .dashboard-container {
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: center; */
-    gap: 20px;
-    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px;
 }
 
 .dashboard-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.dashboard-card:hover {
+.dashboard-card__title {
+    color: #992222;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #992222;
+    padding-bottom: 10px;
+}
+
+.dashboard-card__btn {
+    display: inline-block;
+    background-color: #992222;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.dashboard-card__btn:hover {
+    background-color: #801b1b;
     transform: scale(1.05);
 }
-
-.dashboard-card h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.dashboard-card input {
-    width: 90%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.dashboard-btn {
+.dashboard-card__btn_bmi {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
+    background-color: #992222;
     color: white;
-    /* background: linear-gradient(45deg, #ff7e5f, #feb47b); */
-    background-color: #333;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-
-.success-message {
-    color: green;
     margin-top: 10px;
+    margin-left: 17px;
+}
+
+.dashboard-card__btn_bmi:hover {
+    background-color: #801b1b;
+    transform: scale(1.05);
+}
+.dashboard-card input {
+    background-color: #333;
+    border: 1px solid #444;
+}
+
+.dashboard-card input:focus {
+    outline: none;
+    border-color: #992222;
+    box-shadow: 0 0 3px #992222;
+}
+
+.dashboard-card__text {
+    line-height: 1.6;
+    margin: 10px 0;
+    color: #ddd;
+}
+.dashboard-card__text_ch {
+    line-height: 1.6;
+    margin: 10px 0;
+    color: #ddd;
+    text-align: center;
+}
+
+.dashboard-card__highlight {
+    color: #992222;
     font-weight: bold;
 }
 
-.error-message {
-    color: red;
-    font-weight: bold;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .dashboard-card {
+        margin-bottom: 15px;
+    }
+}
+
+/* Input group styling */
+.dashboard-card__input-group + .dashboard-card__input-group {
+    margin-top: 10px;
+}
+
+/* BMI Results Styling */
+.dashboard-card__result {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* Daily Challenge specific styling */
+.dashboard-card--challenge {
+    grid-column: 1 / -1;
+}
+
+.dashboard-card--challenge .dashboard-card__text {
+    font-size: 1.1em;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+}
+.dashboard-card--challenge .dashboard-card__text_ch {
+    font-size: 24px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+}
+.dashboard-card__error {
+    color: #992222;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.dashboard-card_link{
+    text-decoration: none;
+    color: #e67f7f;
+}
+.dashboard-card_link:hover{
+    color: #874040;
 }
