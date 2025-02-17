@@ -1,138 +1,222 @@
+/* Generator.css */
 .workout-generator-generate {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-    background-color: #333;
+    background-color: #1a1a1a;
+    min-height: 100vh;
     padding: 2rem;
+    color: #fff;
 }
 
 .title-generate {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 2rem;
+    color: #992222;
     text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    border-bottom: 2px solid #992222;
 }
 
 .main-content-generate {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.form-container-generate,
-.workout-list-container-generate {
-    width: 48%;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+.form-container-generate {
+    flex: 1;
+    min-width: 300px;
+    background-color: #333;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    height: fit-content;
 }
 
-.input-generate,
-.select-generate {
-    display: block;
+.input-generate {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: #444;
+    border: 1px solid #992222;
+    border-radius: 5px;
+    color: #fff;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
 }
 
-.input-generate:focus,
-.select-generate:focus {
+.input-generate:focus {
     outline: none;
-    border-color: #992222;
+    border-color: #ff4444;
+    box-shadow: 0 0 5px #992222;
+}
+
+.select-generate {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    background-color: #444;
+    border: 1px solid #992222;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    appearance: none;
 }
 
 .button-generate {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
     background-color: #992222;
     color: white;
+    padding: 0.8rem 1.5rem;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 2%;
 }
 
 .button-generate:hover {
-    background-color: #45a049;
+    background-color: #ff4444;
+    transform: translateY(-2px);
 }
 
 .status-list-generate {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .status-item-generate {
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 4px;
+    background-color: #444;
     padding: 1rem;
     margin-bottom: 1rem;
-}
-
-.status-item-generate h2 {
-    margin-top: 0;
-    color: #333;
+    border-radius: 5px;
+    border-left: 4px solid #992222;
 }
 
 .status-item-generate p {
     margin: 0.5rem 0;
-    color: #666;
+    color: #ddd;
+}
+
+.workout-list-container-generate {
+    flex: 2;
+    min-width: 300px;
+    background-color: #333;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .workout-list-generate {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
 }
 
 .workout-item-generate {
-    background-color: #fff;
-    border: 1px solid #eee;
+    background-color: #444;
+    padding: 1.5rem;
     border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.3s ease;
-}
-
-.workout-item-generate:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #992222;
+    position: relative;
 }
 
 .workout-item-generate h3 {
     color: #992222;
     margin-top: 0;
+    font-size: 1.5rem;
 }
 
 .workout-image-generate {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    border-radius: 4px;
+    border-radius: 5px;
     margin: 1rem 0;
+    border: 2px solid #333;
 }
 
 .workout-description-generate {
-    color: #555;
+    position: relative;
+    color: #ddd;
     line-height: 1.6;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .main-content-generate {
-        flex-direction: column;
-    }
+.workout-description-blur-generate {
+    max-height: 100px;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    filter: blur(2px);
+}
 
-    .form-container-generate,
-    .workout-list-container-generate {
-        width: 100%;
-    }
+.workout-description-full-generate {
+    max-height: none;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+/* Add these styles to Generator.css */
+.view-toggle-button-generate {
+    position: relative;
+    background: #ff2121;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 2;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.view-more-generate {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.view-less-generate {
+    position: static;
+    transform: none;
+    margin: 15px auto 0;
+    display: block;
+}
+
+.view-toggle-button-generate:hover {
+    background: #ff4444;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.view-more-generate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, #444 100%);
+    z-index: -1;
+    border-radius: 20px;
+}
+
+.workout-description-blur-generate {
+    max-height: 100px;
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    filter: blur(2px);
+    margin-bottom: 30px;
+}
+
+.workout-description-full-generate {
+    max-height: none;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    margin-bottom: 15px;
 }

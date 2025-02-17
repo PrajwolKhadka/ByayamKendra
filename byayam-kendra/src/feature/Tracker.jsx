@@ -71,7 +71,16 @@ const Tracker = () => {
       console.error('Request failed:', error);
     }
   };
+  const weightOptions = [];
+  for (let i = 10; i <= 100; i += 10) {
+    weightOptions.push(<option key={i} value={`${i}kg`}>{i}kg</option>);
+  }
 
+  // Generate reps options programmatically
+  const repsOptions = [];
+  for (let i = 5; i <= 30; i += 5) {
+    repsOptions.push(<option key={i} value={i}>{i}</option>);
+  }
   const handleEdit = (log) => {
     setWorkoutName(log.workout_name);
     setWeight(log.weight);
@@ -127,20 +136,15 @@ const Tracker = () => {
         {/* Weight dropdown */}
         <select value={weight} onChange={(e) => setWeight(e.target.value)} className="dropdown">
           <option value="">Select weight</option>
-          <option value="10kg">10kg</option>
-          <option value="20kg">20kg</option>
-          <option value="30kg">30kg</option>
-          <option value="40kg">40kg</option>
-          <option value="50kg">50kg</option>
+          <option value="daily challenge">Daily Challenge</option>
+          {weightOptions}
         </select>
 
         {/* Reps dropdown */}
         <select value={reps} onChange={(e) => setReps(e.target.value)} className="dropdown">
           <option value="">Select reps</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
+          <option value="daily challenge">Daily Challenge</option>
+          {repsOptions}
         </select>
 
         {/* Description input */}

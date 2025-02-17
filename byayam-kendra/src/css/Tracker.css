@@ -11,16 +11,22 @@
   justify-content: space-between;
 }
 
-.tracker-container h1,
-.tracker-container h3 {
-  color: #fff;
+.tracker-container h1{
+  color: #992222;
   margin-bottom: 20px;
+  border-bottom: 2px solid #992222;
 }
-
+.tracker-container h3 {
+  color: #992222;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #992222;
+  font-size: 25px;
+  margin-top: 10px;
+}
 .tracker-section {
   flex: 1;
   min-width: 300px;
-  margin-right: 30px;
+  margin-right: 70px;
 }
 
 .tracker-section-table {

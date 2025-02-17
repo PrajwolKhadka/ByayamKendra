@@ -14,7 +14,7 @@ const WorkoutGenerator = () => {
     useEffect(() => {
         fetchStatus();
     }, []);
-    
+
     const fetchStatus = async () => {
         const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:3000/api/protected/status/Status', {
@@ -40,9 +40,7 @@ const WorkoutGenerator = () => {
     };
 
     const fetchWorkouts = async (age, height, weight, fitness_level) => {
-        if (!age || !height || !weight || !fitness_level) {
-            return;
-        }
+        if (!age || !height || !weight || !fitness_level) return;
     
         const token = localStorage.getItem("token");
         const response = await fetch(
@@ -55,11 +53,17 @@ const WorkoutGenerator = () => {
                 },
             }
         );
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            setWorkouts(data.workouts?.map(w => ({ ...w, expanded: false })) || []);
         }
-        const data = await response.json();
-        setWorkouts(data.workouts || []);
+    };
+
+    const toggleWorkoutExpansion = (index) => {
+        const updatedWorkouts = [...workouts];
+        updatedWorkouts[index].expanded = !updatedWorkouts[index].expanded;
+        setWorkouts(updatedWorkouts);
     };
 
     const handleSubmit = async (e) => {
@@ -81,17 +85,13 @@ const WorkoutGenerator = () => {
             if (response.ok) {
                 const data = await response.json();
                 if (data.newLog || data.updatedLog) {
-                    setStatusLogs((prev) =>
-                        editing
-                            ? prev.map((log) => (log.id === data.updatedLog.id ? data.updatedLog : log))
-                            : [...prev, data.newLog]
+                    setStatusLogs(prev => editing
+                        ? prev.map(log => log.id === data.updatedLog.id ? data.updatedLog : log)
+                        : [...prev, data.newLog]
                     );
                     resetForm();
                 }
-                fetchWorkouts();
-            } else {
-                const errorData = await response.json();
-                console.error('Error:', errorData);
+                fetchWorkouts(age, height, weight, fitness_level);
             }
         } catch (error) {
             console.error('Request failed:', error);
@@ -146,11 +146,11 @@ const WorkoutGenerator = () => {
                             {statusLogs.length > 0 ? (
                                 statusLogs.map((userstate, index) => (
                                     <li className="status-item-generate" key={index}>
-                                        <p>{userstate.age}</p>
-                                        <p>{userstate.height}</p>
-                                        <p>{userstate.weight}</p>
-                                        <p>{userstate.gender}</p>
-                                        <p>{userstate.fitness_level}</p>
+                                        <p><strong>Age: </strong>{userstate.age}</p>
+                                        <p><strong>Height: </strong>{userstate.height}</p>
+                                        <p><strong>Weight: </strong>{userstate.weight}</p>
+                                        <p><strong>Gender: </strong>{userstate.gender}</p>
+                                        <p><strong>Fitness Level: </strong>{userstate.fitness_level}</p>
                                         <button className="button-generate" onClick={() => handleEdit(userstate)}>Edit</button>
                                     </li>
                                 ))
@@ -169,7 +169,15 @@ const WorkoutGenerator = () => {
                                 <li className="workout-item-generate" key={index}>
                                     <h3>{workout.name}</h3>
                                     <img src={`http://localhost:3000/${workout.image_url}`} alt={workout.name} className="workout-image-generate" />
-                                    <div className="workout-description-generate" dangerouslySetInnerHTML={{ __html: workout.description }} />
+                                    <div className={`workout-description-generate ${!workout.expanded ? 'workout-description-blur-generate' : 'workout-description-full-generate'}`}>
+                                        <div dangerouslySetInnerHTML={{ __html: workout.description }} />
+                                    </div>
+                                    <button 
+                                        className={`view-toggle-button-generate ${workout.expanded ? 'view-less-generate' : 'view-more-generate'}`}
+                                        onClick={() => toggleWorkoutExpansion(index)}
+                                    >
+                                        {workout.expanded ? 'View Less' : 'View More'}
+                                    </button>
                                     <p>Fitness Level: {workout.fitness_level}</p>
                                 </li>
                             ))
