@@ -1,34 +1,36 @@
 'use client';
 
-import { useEffect, useState } from "react"
-import axios from "axios"
-import "../css/UserManagement.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "../css/UserManagement.css";
 
 const UserManagement = () => {
-  const [users, setUsers] = useState([])
-  const [formData, setFormData] = useState({ username: "", email: "", password: "", gender: "", role: "user" })
-  const [editingUserId, setEditingUserId] = useState(null)
+  const [users, setUsers] = useState([]);
+  const [formData, setFormData] = useState({ username: "", email: "", password: "", gender: "", role: "user" });
+  const [editingUserId, setEditingUserId] = useState(null);
+  const [error, setError] = useState("");  // Add error state
 
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, []);
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/auth/users")
-      setUsers(response.data)
+      const response = await axios.get("http://localhost:3000/api/auth/users");
+      setUsers(response.data);
+      setError("");  // Clear error when users are successfully fetched
     } catch (error) {
-      console.error("Error fetching users:", error)
-      alert("An error occurred while fetching users.")
+      console.error("Error fetching users:", error);
+      setError("An error occurred while fetching users.");
     }
-  }
+  };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const dataToSend = { ...formData };
 
@@ -37,33 +39,33 @@ const UserManagement = () => {
       }
 
       if (editingUserId) {
-        await axios.put(`http://localhost:3000/api/auth/users/${editingUserId}`, dataToSend)
+        await axios.put(`http://localhost:3000/api/auth/users/${editingUserId}`, dataToSend);
       } else {
-        await axios.post("http://localhost:3000/api/auth/signup", dataToSend)
+        await axios.post("http://localhost:3000/api/auth/signup", dataToSend);
       }
-      setFormData({ username: "", email: "", password: "", gender: "", role: "user" })
-      setEditingUserId(null)
-      fetchUsers()
+      setFormData({ username: "", email: "", password: "", gender: "", role: "user" });
+      setEditingUserId(null);
+      fetchUsers();
     } catch (error) {
-      console.error("Error submitting form:", error)
-      alert("An error occurred while submitting the form.")
+      console.error("Error submitting form:", error);
+      setError(error.response?.data?.error || "An error occurred while submitting the form.");
     }
-  }
+  };
 
   const handleEdit = (user) => {
-    setFormData({ username: user.username, email: user.email, password:"", gender: user.gender, role: user.role })
-    setEditingUserId(user.id)
-  }
+    setFormData({ username: user.username, email: user.email, password: "", gender: user.gender, role: user.role });
+    setEditingUserId(user.id);
+  };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/auth/users/${id}`)
-      fetchUsers()
+      await axios.delete(`http://localhost:3000/api/auth/users/${id}`);
+      fetchUsers();
     } catch (error) {
-      console.error("Error deleting user:", error)
-      alert("An error occurred while deleting the user.")
+      console.error("Error deleting user:", error);
+      setError(error.response?.data?.error || "An error occurred while deleting the user.");
     }
-  }
+  };
 
   return (
     <div className="user-management">
@@ -86,7 +88,7 @@ const UserManagement = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder={editingUserId ? "New Password (optional)" : "Password"}
-            required={!editingUserId} 
+            required={!editingUserId}
           />
           <select name="gender" value={formData.gender} onChange={handleChange} required>
             <option value="">Select Gender</option>
@@ -103,6 +105,7 @@ const UserManagement = () => {
         <div className="form-row">
           <button type="submit">{editingUserId ? "Update User" : "Create User"}</button>
         </div>
+        {error && <div className="error-message-acc">{error}</div>} 
       </form>
 
       <table className="user-table">
@@ -131,7 +134,7 @@ const UserManagement = () => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default UserManagement
+export default UserManagement;

@@ -7,6 +7,11 @@
     display: flex;
     flex-direction: column;
   }
+  .error-message-acc {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
   
   .user-form {
     display: flex;
