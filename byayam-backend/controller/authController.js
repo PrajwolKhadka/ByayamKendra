@@ -16,7 +16,11 @@ export const signup = async (req, res) => {
       console.log('User exists: ', existingUser);
       return res.status(400).json({ error: 'Username or Email already exists' });
     }
-
+    if (!password || password.length < 8) {
+      return res.status(400).json({ 
+        error: 'Password must be at least 8 characters long' 
+      });
+    }
     console.log('Creating new user...');
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await createUser(username, email, hashedPassword, gender,role);
