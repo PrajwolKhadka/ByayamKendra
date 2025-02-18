@@ -23,13 +23,27 @@ const verifyTokenAndGetUserId = (req) => {
 };
 
 
-// Add a workout log for the user
 export const addWorkout = async (req, res) => {
   try {
     const userId = verifyTokenAndGetUserId(req);
     const { workoutName, weight, reps, description } = req.body;
 
-    const newLog = await addWorkoutLog(userId, workoutName, weight, reps, description);
+    // Validation checks
+    if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Trim whitespace from text fields
+    const trimmedName = workoutName.trim();
+    const trimmedDesc = description.trim();
+
+    const newLog = await addWorkoutLog(
+      userId, 
+      trimmedName, 
+      weight, 
+      reps, 
+      trimmedDesc
+    );
 
     if (!newLog) {
       return res.status(500).json({ error: 'Failed to save workout log' });
@@ -60,14 +74,30 @@ export const getUserWorkouts = async (req, res) => {
   }
 };
 
-// Update a workout log
 export const updateWorkout = async (req, res) => {
   try {
+    const  workoutId = req.params.id;
     const userId = verifyTokenAndGetUserId(req);
-    const { workoutId, workoutName, weight, reps, description } = req.body;
+    const {workoutName, weight, reps, description } = req.body;
 
-    const updatedLog = await updateWorkoutLog(workoutId, userId, workoutName, weight, reps, description);
-    console.log(workoutId);
+    // Validation checks
+    if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Trim whitespace from text fields
+    const trimmedName = workoutName.trim();
+    const trimmedDesc = description.trim();
+
+    const updatedLog = await updateWorkoutLog(
+      workoutId,
+      userId,
+      trimmedName,
+      weight,
+      reps,
+      trimmedDesc
+    );
+
     if (!updatedLog) {
       return res.status(404).json({ error: 'Workout log not found or unauthorized' });
     }
