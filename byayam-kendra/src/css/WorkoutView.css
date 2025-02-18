@@ -1,79 +1,131 @@
-/* General Styles */
 .workout-container-view {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-left: 30%;
-  }
-  
-  .workout-list-view {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .workout-item-view {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .workout-item-view h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .workout-item-view p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .workout-item-view img {
-    border-radius: 8px;
-    object-fit: cover;
-    max-width: 100%;
-    max-height: 150px;
-    margin-bottom: 15px;
-  }
-  
-  .workout-item-view button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .workout-item-view button:hover {
-    background-color: #45a049;
-  }
-  
-  .workout-item-view button:nth-child(2) {
-    background-color: #f44336;
-  }
-  
-  .workout-item-view button:nth-child(2):hover {
-    background-color: #e53935;
-  }
-  
-  .workout-item-view button:focus {
-    outline: none;
-  }
-  
-  /* Container styling for the buttons */
-  .workout-actions-view {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #222;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-left: 32%;
+}
+
+.workout-container-view h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  border-bottom: 2px solid #992222;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.workout-list-view {
+  list-style: none;
+  padding: 0;
+}
+
+.workout-item-view {
+  background: #333;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #992222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+}
+
+
+.workout-item-view h3 {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.workout-item-view img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 10px 0;
+}
+
+/* Description container with blur effect */
+.description-container {
+  position: relative;
+  overflow: hidden;
+  max-height: 80px;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.description-container.blurred {
+  max-height: 80px;
+}
+
+.description-container.blurred::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to bottom, rgba(51, 51, 51, 0), #333);
+}
+
+/* Expanded view */
+.description-container.expanded {
+  max-height: none;
+}
+
+/* View More Button */
+.view-more-btn {
+  background: #992222;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+  display: block;
+}
+
+.view-more-btn:hover {
+  background: #bb3333;
+}
+
+/* Workout Actions */
+.workout-actions-view {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.workout-actions-view button {
+  background: #992222;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.workout-actions-view button:hover {
+  background: #bb3333;
+}
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #992222;
+  background: #222;
+  color: #fff;
+}
+.search-bar:focus {
+  outline: none;
+  border-color: #bb3333;
+}
