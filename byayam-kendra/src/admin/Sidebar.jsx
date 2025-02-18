@@ -21,13 +21,13 @@ const AdminSidebar = () => {
                         <li className={location.pathname === "/admindash" ? "active" : ""}>
                             <Link to="/admindash">Dashboard</Link>
                         </li>
-                        <li className={location.pathname === "/admin/workout" ? "active" : ""}>
+                        <li className={location.pathname === "/workoutadd" ? "active" : ""}>
                             <Link to="/workoutadd">Workout</Link>
                         </li>
                         <li className={location.pathname === "/challenges" ? "active" : ""}>
                             <Link to="/challenges">Challenges</Link>
                         </li>
-                        <li className={location.pathname === "/admin/accounts" ? "active" : ""}>
+                        <li className={location.pathname === "/accounts" ? "active" : ""}>
                             <Link to="/accounts">Accounts</Link>
                         </li>
                         <li>

@@ -111,7 +111,9 @@ function AdminPanel() {
     return (
         <div>
             <div className="admin-panel">
+                <div className='Ch'>
                 <h2>Manage Challenges</h2>
+                </div>
                 <input
                     type="text"
                     value={newChallenge}

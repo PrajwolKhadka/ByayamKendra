@@ -9,6 +9,7 @@ import trackerRoutes from './routes/trackerRoutes.js';
 import statusRoutes from './routes/statusRoute.js';
 import adminAddWorkout from './routes/adminRoute.js';
 import adminChallenge from "./routes/challengesRoute.js"
+import dashAdmin from './routes/dashRoute.js'
 import path from 'path';  // Import path to handle static files
 import { fileURLToPath } from 'url';  // Import to use fileURLToPath
 import { dirname } from 'path';  // Import to use dirname
@@ -40,5 +41,5 @@ app.use('/api/protected/tracker', trackerRoutes);
 app.use('/api/protected/status', statusRoutes);
 app.use('/api/protected/admin', adminAddWorkout);
 app.use('/api/protected/admin',adminChallenge);
-
+app.use('/api/protected/dash',dashAdmin);
 export default app;

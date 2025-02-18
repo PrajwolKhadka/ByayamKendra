@@ -11,7 +11,7 @@
   .user-form {
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa;
+    background-color: #1f1f1f;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;
@@ -35,7 +35,7 @@
     width: 47% !important;
   }
   .user-form button {
-    background-color: #3498db;
+    background-color: #992222;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -50,7 +50,7 @@
   }
   
   .user-form button:hover {
-    background-color: #2980b9;
+    background-color: #801b1b;
   }
   
   .user-table {
@@ -68,11 +68,15 @@
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
   }
-  
+  .user-table td {
+    background-color: #e0e0e0;
+    font-size: 18px;
+  }
   .user-table th {
-    background-color: #f1f3f5;
+    background-color: #858686;
     font-weight: bold;
     color: #333;
+    font-size: 18px;
   }
   
   .user-table tr:hover {
@@ -80,7 +84,7 @@
   }
   
   .user-table button {
-    background-color: #3498db;
+    background-color: #9028a7;
     color: white;
     border: none;
     padding: 6px 12px;

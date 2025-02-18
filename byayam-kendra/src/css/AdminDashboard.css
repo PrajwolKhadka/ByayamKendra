@@ -1,37 +1,71 @@
-/* Admin Dashboard */
 .admin-dashboard {
-    margin-left: 270px;
-    padding: 20px;
-}
-
-.admin-dashboard h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-/* Dashboard Cards */
-.dashboard-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.card {
-    width: 200px;
-    padding: 20px;
-    background: #3498db;
-    color: white;
-    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    background-color: #333;
+    min-height: 100vh;
+    padding: 2rem;
+    margin-left: 16%;
+    overflow: hidden;
+  }
+  
+  .admin-dashboard h1 {
     text-align: center;
-}
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    background-color: #7d7d7d;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    padding: 48px;
+    text-align: center;
+    margin-left: 23%;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  .dashboard-cards a{
+    text-decoration: none;
+    width: 100%;
+    align-items: center;
 
-.card h2 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.card p {
-    font-size: 22px;
+  }
+  .card p {
+    font-size: 2.5rem;
     font-weight: bold;
-    margin-top: 10px;
-}
+    color: #f70000;
+  }
+  
+  .card h2, .card p {
+    margin: 10px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+  
