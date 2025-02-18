@@ -69,3 +69,19 @@ export const deleteUser  = async (id) => {
   const result = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
   return result.rows[0];
 };
+
+export const getUserById = async (id) => {
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const result = await pool.query(query, [id]);
+  return result.rows[0];
+};
+
+export const findOtherUserByEmailOrUsername = async (email, username, excludeId) => {
+  const query = `
+    SELECT * FROM users 
+    WHERE (email = $1 OR username = $2) 
+    AND id != $3
+  `;
+  const result = await pool.query(query, [email, username, excludeId]);
+  return result.rows;
+};

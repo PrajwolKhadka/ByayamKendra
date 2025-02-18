@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { createUser, findUserByEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser } from '../model/userModel.js';
+import { createUser, findUserByEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Signup
@@ -105,28 +105,45 @@ export const updateUsers = async (req, res) => {
   let updateData = { ...req.body };
 
   try {
-    const existingUser = await findUserByEmailOrUsername(email, username);
-
-    if (existingUser && existingUser.length > 0) {
-      console.log('User exists: ', existingUser);
-      return res.status(400).json({ error: 'Username or Email already exists' });
+    // Get existing user data
+    const existingUser = await getUserById(id);
+    if (!existingUser) {
+      return res.status(404).json({ error: 'User not found' });
     }
 
+    // Check for email/username changes
+    if (updateData.email || updateData.username) {
+      const newEmail = updateData.email || existingUser.email;
+      const newUsername = updateData.username || existingUser.username;
+
+      // Check against other users
+      const otherUser = await findOtherUserByEmailOrUsername(
+        newEmail,
+        newUsername,
+        id
+      );
+      
+      if (otherUser.length > 0) {
+        return res.status(400).json({ error: 'Email/username already exists' });
+      }
+    }
+
+    // Validate password
     if (updateData.password) {
       if (updateData.password.length < 8) {
-        return res.status(400).json({ error: 'Password must be at least 8 characters' });
+        return res.status(400).json({ 
+          error: 'Password must be at least 8 characters' 
+        });
       }
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
+    // Perform update
     const updatedUser = await updateUser(id, updateData);
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
     res.json(updatedUser);
+
   } catch (error) {
-    console.error('Error updating user:', error);
+    console.error('Update error:', error);
     res.status(500).json({ error: 'Error updating user' });
   }
 };
