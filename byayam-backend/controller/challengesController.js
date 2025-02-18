@@ -1,4 +1,8 @@
 import {getChallenges,addChallenge,updateChallenge,deleteChallenge} from "../model/challengesModel.js"
+
+const MIN_CHALLENGE_LENGTH = 10;
+const MAX_CHALLENGE_LENGTH = 500;
+
 export const getChallenge = async (req, res) => {
     try {
         const challenges = await getChallenges();
@@ -23,10 +27,29 @@ export const getDayChallenge = async (req, res) => {
 export const addChallenges = async (req, res) => {
     const { challenge_text } = req.body;
     try {
-        await addChallenge(challenge_text);
-        res.status(201).send('Challenge added');
+        if (!challenge_text?.trim()) {
+            return res.status(400).json({ error: 'Challenge text is required' });
+        }
+
+        const trimmedText = challenge_text.trim();
+        
+        if (trimmedText.length < MIN_CHALLENGE_LENGTH) {
+            return res.status(400).json({ 
+                error: `Challenge text must be at least ${MIN_CHALLENGE_LENGTH} characters` 
+            });
+        }
+
+        if (trimmedText.length > MAX_CHALLENGE_LENGTH) {
+            return res.status(400).json({ 
+                error: `Challenge text cannot exceed ${MAX_CHALLENGE_LENGTH} characters` 
+            });
+        }
+
+        await addChallenge(trimmedText);
+        res.status(201).json({ message: 'Challenge added successfully' });
+
     } catch (err) {
-        res.status(500).send(err.message);
+        res.status(500).json({ error: err.message });
     }
 };
 
@@ -34,10 +57,35 @@ export const addChallenges = async (req, res) => {
 export const updateChallenges = async (req, res) => {
     const { id, challenge_text } = req.body;
     try {
-        await updateChallenge(id, challenge_text);
-        res.status(200).send('Challenge updated');
+        if (!challenge_text?.trim()) {
+            return res.status(400).json({ error: 'Challenge text is required' });
+        }
+
+        const trimmedText = challenge_text.trim();
+        
+        if (trimmedText.length < MIN_CHALLENGE_LENGTH) {
+            return res.status(400).json({ 
+                error: `Challenge text must be at least ${MIN_CHALLENGE_LENGTH} characters` 
+            });
+        }
+
+        if (trimmedText.length > MAX_CHALLENGE_LENGTH) {
+            return res.status(400).json({ 
+                error: `Challenge text cannot exceed ${MAX_CHALLENGE_LENGTH} characters` 
+            });
+        }
+
+        // Check if challenge exists
+        const existingChallenge = await getChallengeById(id);
+        if (!existingChallenge) {
+            return res.status(404).json({ error: 'Challenge not found' });
+        }
+
+        await updateChallenge(id, trimmedText);
+        res.status(200).json({ message: 'Challenge updated successfully' });
+
     } catch (err) {
-        res.status(500).send(err.message);
+        res.status(500).json({ error: err.message });
     }
 };
 
