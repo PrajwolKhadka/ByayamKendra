@@ -78,7 +78,7 @@ function AdminPanel() {
             try {
                 const token = localStorage.getItem("token");
                 await axios.put(
-                    'http://localhost:3000/api/protected/admin/challenges',
+                    'http://localhost:3000/api/protected/admin/challenges/${id}',
                     {
                         id: editingChallenge.id,
                         challenge_text: editingChallenge.challenge_text
