@@ -40,7 +40,7 @@ export const createTrackTable = async () => {
         user_id INT REFERENCES users(id) ON DELETE CASCADE,
         workout_name VARCHAR(255) NOT NULL,
         weight VARCHAR(50),
-        reps INT NOT NULL,
+        reps VARCHAR(10) NOT NULL,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );

@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Route to add a new workout (admin only)
 router.post('/adminworkouts', upload.single('imageFile'),verifyToken, addAdminWorkoutController); // Use multer middleware
-router.put('/adminworkouts/:id', upload.single('image'), verifyToken,updateAdminWorkoutController);
+router.put('/adminworkouts/:id', upload.single('imageFile'), verifyToken,updateAdminWorkoutController);
 router.delete('/adminworkouts/:id', verifyToken,deleteAdminWorkoutController);
 router.get('/adminworkouts', verifyToken,getAllAdminWorkoutsController);
 router.get('/filter', verifyToken, fetchUserWorkouts);
