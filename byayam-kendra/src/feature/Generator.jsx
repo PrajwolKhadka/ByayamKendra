@@ -121,7 +121,8 @@ const WorkoutGenerator = () => {
             <h1 className="title-generate">Workout Generator</h1>
             <div className="main-content-generate">
                 <div className="form-container-generate">
-                    {editing ? (
+                    {/* Show the form if no status logs are available or if editing */}
+                    {statusLogs.length === 0 || editing ? (
                         <form onSubmit={handleSubmit}>
                             <input className="input-generate" value={age} onChange={(e) => setAge(e.target.value)} placeholder='Enter Your Age' required />
                             <select className="select-generate" value={gender} onChange={(e) => setGender(e.target.value)} required>
@@ -142,8 +143,9 @@ const WorkoutGenerator = () => {
                             </button>
                         </form>
                     ) : (
+                        // Display the logs with an edit button if not in edit mode
                         <ul className="status-list-generate">
-                            {statusLogs.length > 0 ? (
+                            {
                                 statusLogs.map((userstate, index) => (
                                     <li className="status-item-generate" key={index}>
                                         <p><strong>Age: </strong>{userstate.age}</p>
@@ -154,9 +156,7 @@ const WorkoutGenerator = () => {
                                         <button className="button-generate" onClick={() => handleEdit(userstate)}>Edit</button>
                                     </li>
                                 ))
-                            ) : (
-                                <p>No workout logs available. Please add a new status.</p>
-                            )}
+                            }
                         </ul>
                     )}
                 </div>

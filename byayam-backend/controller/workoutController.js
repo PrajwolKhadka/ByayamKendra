@@ -17,16 +17,57 @@ const verifyTokenAndGetUserId = (req) => {
 };
 
 
-// Add a workout log for the user
 export const addStatus = async (req, res) => {
   try {
     const userId = verifyTokenAndGetUserId(req);
-    const { age, height, weight, gender,fitness_level } = req.body;
+    const { age, height, weight, gender, fitness_level } = req.body;
+
+    if (!age || !height || !weight || !gender || !fitness_level) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Numerical validation
+    const ageNum = Number(age);
+    const heightNum = Number(height);
+    const weightNum = Number(weight);
+    
+    if (isNaN(ageNum) || isNaN(heightNum) || isNaN(weightNum)) {
+      return res.status(400).json({ error: 'Age, height, and weight must be valid numbers' });
+    }
+
+    if (ageNum <= 0 || heightNum <= 0 || weightNum <= 0) {
+      return res.status(400).json({ error: 'Age, height, and weight must be greater than 0' });
+    }
+
+    // Gender validation
+    const allowedGenders = ['male', 'female'];
+    const genderLower = gender.toLowerCase();
+    if (!allowedGenders.includes(genderLower)) {
+      return res.status(400).json({ error: 'Invalid gender. Allowed values: male, female' });
+    }
+
+    // Fitness level validation
+    const allowedLevels = ['beginner', 'intermediate', 'advanced'];
+    const fitnessLevelLower = fitness_level.toLowerCase();
+    if (!allowedLevels.includes(fitnessLevelLower)) {
+      return res.status(400).json({ error: 'Invalid fitness level. Allowed values: beginner, intermediate, advanced' });
+    }
+
+    // Check for existing logs
     const existingLogs = await getStateByUserId(userId);
     if (existingLogs && existingLogs.length > 0) {
       return res.status(400).json({ error: 'Only one workout log is allowed per user.' });
     }
-    const newLog = await addStatusLog(userId, age, height, weight, gender,fitness_level);
+
+    // Create new log with validated and parsed values
+    const newLog = await addStatusLog(
+      userId,
+      ageNum,
+      heightNum,
+      weightNum,
+      genderLower,
+      fitnessLevelLower
+    );
 
     if (!newLog) {
       return res.status(500).json({ error: 'Failed to save workout log' });
@@ -60,11 +101,53 @@ export const getUserStatus = async (req, res) => {
 // Update a workout log
 export const updateStatus = async (req, res) => {
   try {
+    const StatusId= req.params.id;
     const userId = verifyTokenAndGetUserId(req);
-    const { StatusId,age, height, weight, gender,fitness_level} = req.body;
-    console.log("updating with"+ StatusId,age, height, weight, gender,fitness_level)
-    const updatedLog = await updateStatusLog(StatusId,userId,age, height, weight, gender,fitness_level);
-    console.log(StatusId);
+    const { age, height, weight, gender, fitness_level } = req.body;
+
+    // Validation checks
+    if (!age || !height || !weight || !gender || !fitness_level) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Numerical validation
+    const ageNum = Number(age);
+    const heightNum = Number(height);
+    const weightNum = Number(weight);
+    
+    if (isNaN(ageNum) || isNaN(heightNum) || isNaN(weightNum)) {
+      return res.status(400).json({ error: 'Age, height, and weight must be valid numbers' });
+    }
+
+    if (ageNum <= 0 || heightNum <= 0 || weightNum <= 0) {
+      return res.status(400).json({ error: 'Age, height, and weight must be greater than 0' });
+    }
+
+    // Gender validation
+    const allowedGenders = ['male', 'female'];
+    const genderLower = gender.toLowerCase();
+    if (!allowedGenders.includes(genderLower)) {
+      return res.status(400).json({ error: 'Invalid gender. Allowed values: male, female' });
+    }
+
+    // Fitness level validation
+    const allowedLevels = ['beginner', 'intermediate', 'advanced'];
+    const fitnessLevelLower = fitness_level.toLowerCase();
+    if (!allowedLevels.includes(fitnessLevelLower)) {
+      return res.status(400).json({ error: 'Invalid fitness level. Allowed values: beginner, intermediate, advanced' });
+    }
+
+    // Proceed with update
+    const updatedLog = await updateStatusLog(
+      StatusId,
+      userId,
+      ageNum,
+      heightNum,
+      weightNum,
+      genderLower,
+      fitnessLevelLower
+    );
+
     if (!updatedLog) {
       return res.status(404).json({ error: 'Status not found or unauthorized' });
     }
