@@ -83,4 +83,110 @@
     height: 280px;
     border-radius: 5px;
   }
+  @media (max-width: 480px) {
+    .container-suggest {
+      min-height: auto;
+    }
   
+    .sidebar-suggest {
+      padding: 5px;
+    }
+  
+    .sidebar-suggest-item {
+      padding: 8px;
+      margin: 5px 0;
+      min-width: 160px;
+      font-size: 0.9rem;
+    }
+  
+    .main-content-suggest {
+      padding: 10px;
+    }
+  
+    .details-suggest h2 {
+      font-size: 1.4rem;
+    }
+  
+    .details-suggest p {
+      font-size: 0.9rem;
+    }
+  
+    .day-details h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+  
+    .exercise-image {
+      max-width: 150px;
+      margin: 0 auto;
+    }
+  
+    .exercise {
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  
+    .workout-details {
+      gap: 10px;
+    }
+  
+    .placeholder-suggest {
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 15px;
+    }
+  
+    .sidebar-suggest-item.active {
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container-suggest {
+      flex-direction: row;
+      height: 100vh;
+    }
+  
+    .sidebar-suggest {
+      width: 25%;
+      height: 100vh;
+    }
+  
+    .main-content-suggest {
+      border-left: 2px solid #992222;
+      border-top: none;
+      padding: 20px;
+    }
+  
+    .workout-details {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .exercise {
+      flex-direction: row;
+      text-align: left;
+    }
+  
+    .exercise-image {
+      width: 200px;
+      height: 280px;
+    }
+  
+    .day-details h3 {
+      font-size: 2rem;
+    }
+  
+    .details-suggest h2 {
+      font-size: 2rem;
+    }
+  
+    .details-suggest p {
+      font-size: 1.2rem;
+    }
+  
+    .sidebar-suggest-item {
+      padding: 15px;
+      margin: 10px 0;
+    }
+  }

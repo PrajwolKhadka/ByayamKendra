@@ -9,6 +9,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 8%;
 }
 
 .tracker-container h1{
@@ -121,4 +122,104 @@ textarea {
   margin-left: 15px;
   margin-top: 10px;
   color: #d63131;
+}
+
+@media (max-width: 768px) {
+  .tracker-container {
+    margin: 15px;
+    padding: 15px;
+    margin-bottom: 15%;
+  }
+
+  .tracker-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .tracker-container h3 {
+    font-size: 1.4rem;
+  }
+
+  .dropdown,
+  .text-area,
+  textarea {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .button-track {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .workout-table th,
+  .workout-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .workout-table button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tracker-container {
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 20%;
+  }
+
+  .tracker-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .tracker-section-table {
+    flex: 2;
+    min-width: fit-content;
+    overflow: hidden;
+}
+  .tracker-container h3 {
+    display: none;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .dropdown,
+  .text-area,
+  textarea {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .button-track {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .workout-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 92%;
+  }
+
+  .workout-table th,
+  .workout-table td {
+    padding: 6px 4px;
+    min-width: 50px;
+    line-height: 1.2;
+  }
+
+  .tracker-section textarea {
+    margin-left: 0;
+    height: 70px;
+  }
+
+  .error-message-tracker {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
 }

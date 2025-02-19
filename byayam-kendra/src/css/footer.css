@@ -1,0 +1,50 @@
+/* Footer.css */
+.footer-container {
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    background-color: 	#2c2c2c;
+    padding: 30px;
+    
+  }
+  
+  .footer-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .footer-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
+    margin-bottom: 50px;
+  }
+  
+  .footer-links a:hover {
+    color: #f76c6c;
+  }
+  
+  .footer-social a {
+    font-size: 20px;
+    color: white;
+    margin: 0 10px;
+    margin-bottom: 80px;
+    padding: 5px;
+    background-color: rgb(0, 0, 0);
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .footer-social a:hover {
+    color: #f76c6c;
+  }
+  
+  .footer-copy {
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.7;
+    color: #fff;
+  }
+  
