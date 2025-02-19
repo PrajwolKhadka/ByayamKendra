@@ -58,6 +58,10 @@
   }
   
   @media (max-width: 768px) {
+    .admin-dashboard{
+      margin-left: -15%;
+
+    }
     .dashboard-cards {
       flex-direction: column;
       align-items: center;
@@ -67,5 +71,12 @@
       width: 80%;
       margin-bottom: 20px;
     }
+    .admin-dashboard h1 {
+      margin-left: 25%;
+    }
   }
-  
+  @media (max-width: 768px){
+    .admin-dashboard{
+      margin-left: -5%;
+    }
+  }

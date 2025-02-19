@@ -113,7 +113,7 @@
   
   @media (max-width: 768px) {
     .user-management {
-      margin-left: 35%;
+      margin-left: 10%;
       padding: 10px;
   }
     .form-row {
@@ -137,15 +137,18 @@
   }
   @media (max-width: 480px) {
     .user-management {
-      margin-left: 55%;
+      margin-left: 18%;
       padding: 0px;
       width: 80%;
   }
     .user-table td {
-        font-size: 14px;
-        padding: 8px 1px;
+        font-size: 12px;
+        padding: 8px 005px;
     }
-    
+    .user-table th {
+      font-size: 12px;
+      padding: 8px 1px;
+  }
     .user-table button {
         font-size: 12px;
     }

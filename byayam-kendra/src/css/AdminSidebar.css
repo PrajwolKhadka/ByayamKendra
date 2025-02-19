@@ -63,7 +63,40 @@
     cursor: pointer;
     z-index: 1000;
 }
-
+.icon{
+    display: none;
+}
 .sidebar-toggle-admin:hover {
     background: #34495e;
+}
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 80px;
+        padding-top: 20px;
+    }
+
+    .admin-sidebar nav ul li a {
+        font-size: 0;
+        padding: 15px 0;
+    }
+
+    .admin-sidebar nav ul li a .icon {
+        display: block;
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        font-size: 0;
+        padding: 15px 0;
+    }
+
+    .logout-btn .icon {
+        display: block;
+        font-size: 24px;
+    }
+
+    /* Remove hover expansion */
+    .admin-sidebar:hover {
+        width: 80px;
+    }
 }

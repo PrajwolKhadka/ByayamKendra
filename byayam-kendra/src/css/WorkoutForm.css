@@ -115,10 +115,12 @@
 @media (max-width: 768px) {
   .workout-form-workoutadmin {
       grid-template-columns: 1fr;
+      margin-left:10px ;
   }
   
   .card-workoutadmin {
       margin: 1rem;
+      margin-left: 10%;
   }
   
   .card-header-workoutadmin {
@@ -129,7 +131,47 @@
       font-size: 1.4rem;
   }
 }
+@media (max-width: 480px) {
+  .workout-form-workoutadmin {
+      grid-template-columns: 1fr;
+      margin-left:10px ;
+  }
+  .container-workout-admin{
+    margin-left: 10%;
+  }
+  .card-workoutadmin {
+      /* margin: 1rem; */
+      margin-left: 10%;
+  }
 
+  .card-header-workoutadmin {
+      padding: 0.5rem;
+  }
+  
+  .card-title-workoutadmin {
+      font-size: 1.4rem;
+  }
+  .form-group-workoutadmin input,
+.form-group-workoutadmin select,
+.form-group-workoutadmin .ql-container {
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  max-width: 100%;
+  margin-left: 0px;
+}
+.form-group-workoutadmin label {
+  color: #fff;
+  font-size:20px;
+  margin-bottom: -10px;
+  margin-left: 0px;
+}
+.ql-toolbar{
+  margin-left: 0px !important;
+}
+}
 /* Quill Editor Customization */
 .ql-snow .ql-stroke {
   stroke: #fff;

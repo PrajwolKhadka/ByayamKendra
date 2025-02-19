@@ -17,23 +17,38 @@ const AdminSidebar = () => {
             {/* Sidebar */}
             <div className="admin-sidebar" ref={sidebarRef}>
                 <nav>
-                    <ul>
-                        <li className={location.pathname === "/admindash" ? "active" : ""}>
-                            <Link to="/admindash">Dashboard</Link>
-                        </li>
-                        <li className={location.pathname === "/workoutadd" ? "active" : ""}>
-                            <Link to="/workoutadd">Workout</Link>
-                        </li>
-                        <li className={location.pathname === "/challenges" ? "active" : ""}>
-                            <Link to="/challenges">Challenges</Link>
-                        </li>
-                        <li className={location.pathname === "/accounts" ? "active" : ""}>
-                            <Link to="/accounts">Accounts</Link>
-                        </li>
-                        <li>
-                            <button className="logout-btn" onClick={handleLogout}>Logout</button>
-                        </li>
-                    </ul>
+                <ul>
+    <li className={location.pathname === "/admindash" ? "active" : ""}>
+        <Link to="/admindash">
+            <span className="icon">📊</span>
+            <span>Dashboard</span>
+        </Link>
+    </li>
+    <li className={location.pathname === "/workoutadd" ? "active" : ""}>
+        <Link to="/workoutadd">
+            <span className="icon">🏋️</span>
+            <span>Workout</span>
+        </Link>
+    </li>
+    <li className={location.pathname === "/challenges" ? "active" : ""}>
+        <Link to="/challenges">
+            <span className="icon">🎯</span>
+            <span>Challenges</span>
+        </Link>
+    </li>
+    <li className={location.pathname === "/accounts" ? "active" : ""}>
+        <Link to="/accounts">
+            <span className="icon">👤</span>
+            <span>Accounts</span>
+        </Link>
+    </li>
+    <li>
+        <button className="logout-btn" onClick={handleLogout}>
+            <span className="icon">↪</span>
+            <span>Logout</span>
+        </button>
+    </li>
+</ul>
                 </nav>
             </div>
         </>
