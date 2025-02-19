@@ -112,6 +112,10 @@
   }
   
   @media (max-width: 768px) {
+    .user-management {
+      margin-left: 35%;
+      padding: 10px;
+  }
     .form-row {
       flex-direction: column;
       gap: 10px;
@@ -128,8 +132,27 @@
   
     .user-table th,
     .user-table td {
-      padding: 8px 10px;
+      padding: 8px 2px;
     }
   }
-  
+  @media (max-width: 480px) {
+    .user-management {
+      margin-left: 55%;
+      padding: 0px;
+      width: 80%;
+  }
+    .user-table td {
+        font-size: 14px;
+        padding: 8px 1px;
+    }
+    
+    .user-table button {
+        font-size: 12px;
+    }
+    
+    .form-row input,
+    .form-row select {
+        font-size: 14px;
+    }
+}
   
