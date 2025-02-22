@@ -10,13 +10,14 @@ import statusRoutes from './routes/statusRoute.js';
 import adminAddWorkout from './routes/adminRoute.js';
 import adminChallenge from "./routes/challengesRoute.js"
 import dashAdmin from './routes/dashRoute.js'
+import helmet from 'helmet';
+import xssClean from 'xss-clean';
 import path from 'path';  // Import path to handle static files
 import { fileURLToPath } from 'url';  // Import to use fileURLToPath
 import { dirname } from 'path';  // Import to use dirname
 
 dotenv.config();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 // Initialize the database
@@ -33,6 +34,8 @@ app.use('/uploads', express.static(uploadsPath)); // This line serves the static
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(helmet());
+app.use(xssClean());
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -42,4 +45,9 @@ app.use('/api/protected/status', statusRoutes);
 app.use('/api/protected/admin', adminAddWorkout);
 app.use('/api/protected/admin',adminChallenge);
 app.use('/api/protected/dash',dashAdmin);
+
+app.use((req, res, next) => {
+    res.status(404).json({ error: 'Route not found' });
+  });
+
 export default app;

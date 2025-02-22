@@ -1,7 +1,7 @@
 import multer from 'multer';
 import path from 'path';
 import { addAdminWorkout,updateAdminWorkout,deleteAdminWorkout,getAllAdminWorkouts } from '../model/adminModel.js';
-
+ 
 // Set up multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

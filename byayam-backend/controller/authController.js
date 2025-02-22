@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import validator from 'validator'; 
+import xssClean from 'xss-clean'; 
 import { createUser, updatePassword,findUserByEmail,findUserForEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
@@ -9,6 +11,15 @@ export const signup = async (req, res) => {
   const { username, email, password, gender, role='user' } = req.body;
 
   try {
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
+    if (!validator.isAlphanumeric(username.replace(/[_-]/g, ''))) {
+      return res.status(400).json({ error: 'Invalid username format' });
+    }
+    if (!password || password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    }
     console.log('Checking if user exists...');
     const existingUser = await findUserByEmailOrUsername(email, username);
 
@@ -55,6 +66,9 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
     const user = await findUserByEmail(email);
 
     // If no user is found, return an error
@@ -138,7 +152,13 @@ export const updateUsers = async (req, res) => {
   let updateData = { ...req.body };
 
   try {
-    // Get existing user data
+    if (updateData.username) {
+      updateData.username = xssClean(updateData.username); // Apply XSS sanitization
+    }
+    if (updateData.email) {
+      updateData.email = xssClean(updateData.email); // Apply XSS sanitization
+    }
+    
     const existingUser = await getUserById(id);
     if (!existingUser) {
       return res.status(404).json({ error: 'User not found' });
