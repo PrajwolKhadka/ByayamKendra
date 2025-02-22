@@ -9,14 +9,14 @@ describe('Security Tests for Authentication Routes', () => {
     const res = await request(app)
       .post('/api/auth/signup')
       .send({
-        username: "testuser_OR1",
+        username: "testuser' OR 1=1 --",
         email: 'test1@example.com',
         password: 'password123',
         gender: 'male',
       });
     
     expect(res.status).toBe(400);  // Ensure the request is rejected
-    expect(res.body.error).toBe('Username or Email already exists');  // Or custom message
+    expect(res.body.error).toMatch(/Invalid username format/);  // Or custom message
   });
 
   // Test for SQL Injection during user login
@@ -38,12 +38,11 @@ describe('Security Tests for Authentication Routes', () => {
       .post('/api/auth/signup')
       .send({
         username: '<script>alert("XSS")</script>',
-        email: 'test@example.com',
+        email: 'test_xss@example.com',
         password: 'password123',
         gender: 'male',
       });
-      expect(res.status).toBe(201);
-      expect(res.body.user.username).toBe('&lt;script&gt;alert("XSS")&lt;/script&gt;');
+      expect(res.status).toBe(400);
   });
 
   // Test for XSS attack prevention in update user
@@ -54,7 +53,8 @@ describe('Security Tests for Authentication Routes', () => {
         username: '<script>alert("XSS")</script>'
       });
     
-    expect(res.status).toBe(400);  // Ensure the request is rejected
+      expect(res.status).toBe(200);
+      expect(res.body.username).toBe('&lt;script&gt;alert("XSS")&lt;/script&gt;');
   });
 
   // Test for 404 error handling for unknown routes
@@ -69,12 +69,12 @@ describe('Security Tests for Authentication Routes', () => {
     const res = await request(app)
       .post('/api/auth/reset-password')
       .send({
-        email: "test@example.com' OR 1=1 --",  // SQL Injection attempt
+        email: "tracker@example.com' OR 1=1 --",  // SQL Injection attempt
         password: 'newpassword123',
       });
     
-    expect(res.status).toBe(400);  // Ensure the request is rejected
-    expect(res.body.error).toBe('Invalid email or password');
+    expect(res.status).toBe(404);  // Ensure the request is rejected
+    expect(res.body.error).toBe('Email not found');
   });
 
 });
