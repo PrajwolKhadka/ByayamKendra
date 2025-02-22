@@ -9,7 +9,7 @@ import Login from "./public/Login";
 import Feature from "./feature/feature.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Admin from "./admin/Admin.jsx";
-
+import ForgotPassword from "./public/ForgotPassword.jsx";
 // Override localStorage methods to detect token changes
 const tokenAwareLocalStorage = () => {
   const originalSetItem = localStorage.setItem;
@@ -73,7 +73,7 @@ const App = () => {
           <Route path="/" element={role === "admin" ? <Navigate to="/admindash" /> : role ? <Navigate to="/dashboard" /> : <LandingPage />} />
           <Route path="/signup" element={authToken ? <Navigate to={role === "admin" ? "/admindash" : "/dashboard"} /> : <Signup />} />
           <Route path="/login" element={authToken ? <Navigate to={role === "admin" ? "/admindash" : "/dashboard"} /> : <Login setAuth={setAuthToken} />} />
-
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           {/* Always render protected routes; ProtectedRoute handles redirection */}
           <Route element={<ProtectedRoute allowedRoles={["user", "admin"]} />}>
             <Route path="/dashboard" element={<Feature />} />

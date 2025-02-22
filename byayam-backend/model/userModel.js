@@ -33,6 +33,10 @@ export const findUserByEmail = async (email) => {
   return rows[0]; 
 };
 
+export const updatePassword = async (email, hashedPassword) => {
+  await pool.query("UPDATE users SET password = $1 WHERE email = $2", [hashedPassword, email]);
+};
+
 export const findUserForEmail = async (id) => {
   const query = `
     SELECT email FROM users 
@@ -94,3 +98,4 @@ export const findOtherUserByEmailOrUsername = async (email, username, excludeId)
   const result = await pool.query(query, [email, username, excludeId]);
   return result.rows;
 };
+

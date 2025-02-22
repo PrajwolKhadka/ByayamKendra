@@ -110,7 +110,7 @@ const Login = ({ setAuth }) => {
             {errors.password && <span className="error-message">{errors.password}</span>}
             <br />
             <i className={`bx ${showPassword ? "bx-show" : "bx-hide"} eye`} onClick={togglePasswordVisibility}></i>
-
+            <Link to="/forgot-password" className="forgot">Forgot Password?</Link><br/>
             <button id="LoginButton" type="submit" disabled={isLoading}>
               {isLoading ? "Logging in..." : "Login"}
             </button>

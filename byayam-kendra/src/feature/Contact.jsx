@@ -133,6 +133,7 @@ const ContactUs = () => {
               <option value="">Select an Issue</option>
               <option value="Login Problem">Login Problem</option>
               <option value="Workout Issues">Workout Issue</option>
+              <option value="Password Reset">Password Reset</option>
               <option value="Account Deletion">Account Deletion</option>
               <option value="Other">Other</option>
             </select>

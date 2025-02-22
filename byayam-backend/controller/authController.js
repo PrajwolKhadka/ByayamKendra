@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { createUser, findUserByEmail,findUserForEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
+import { createUser, updatePassword,findUserByEmail,findUserForEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Signup
@@ -89,6 +89,28 @@ export const login = async (req, res) => {
   }
 };
 
+export const resetPassword = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if user exists
+    const user = await findUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ error: "Email not found" });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update user password in the database
+    await updatePassword(email, hashedPassword);
+
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 export const getAllUser = async (req, res) => {
   try {
     const users = await getAllUsers();
@@ -110,6 +132,7 @@ export const getEmailUser = async (req, res) => {
     res.status(500).json({ error: 'Error fetching users' });
   }
 };
+
 export const updateUsers = async (req, res) => {
   const { id } = req.params;
   let updateData = { ...req.body };

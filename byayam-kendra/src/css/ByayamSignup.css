@@ -51,7 +51,10 @@ video {
     width: 100%; /* Ensure it takes the full width */
     margin: 0; 
 }
-
+.forgot{
+    margin-left: 67%;
+    margin-top: 10%;
+}
 #formdiv {
     align-items: center;
     background-color: rgba(64, 64, 64, 0.8); /* Add transparency with RGBA */
@@ -157,7 +160,7 @@ input[type="password"] {
 }
 .eye{
     position: absolute;
-    top: 57%; /* Adjusted to fit inside the input box */
+    top: 53%; /* Adjusted to fit inside the input box */
     right: 70px; /* Distance from the right edge */
     transform: translateY(-50%);
     font-size: 20px; /* Size of the icon */
