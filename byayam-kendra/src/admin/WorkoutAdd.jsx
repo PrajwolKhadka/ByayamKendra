@@ -166,7 +166,12 @@ const WorkoutForm = () => {
               required
             />
           </div>
-
+          <div className="form-group-workoutadmin">
+            <label htmlFor="imageFile">Upload Image</label>
+            <button type="button" onClick={handleUploadClick} className="upload-button-admin">Upload Image</button>
+              <input type="file" id="imageFile" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+              {workout.imagePreview && <img src={workout.imagePreview} alt="Preview"  className="pre-admin"/>}
+            </div>
           <div className="form-group-workoutadmin">
             <label htmlFor="description">Description</label>
             <Suspense fallback={<div>Loading editor...</div>}>
@@ -203,13 +208,6 @@ const WorkoutForm = () => {
               <option value="Advanced">Advanced</option>
             </select>
           </div>
-
-          <div className="form-group-workoutadmin">
-            <label htmlFor="imageFile">Upload Image</label>
-            <button type="button" onClick={handleUploadClick} className="upload-button-admin">Upload Image</button>
-              <input type="file" id="imageFile" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
-              {workout.imagePreview && <img src={workout.imagePreview} alt="Preview"  className="pre-admin"/>}
-            </div>
           <button type="submit" className="submit-button-workoutadmin">
             {location.state?.workout ? "Update Workout" : "Add Workout"}
           </button><br/><br/>
