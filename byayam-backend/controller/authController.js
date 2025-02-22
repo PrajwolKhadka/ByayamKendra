@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import validator from 'validator'; 
 import xssClean from 'xss-clean'; 
+import xss from 'xss';
 import { createUser, updatePassword,findUserByEmail,findUserForEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
@@ -153,10 +154,10 @@ export const updateUsers = async (req, res) => {
 
   try {
     if (updateData.username) {
-      updateData.username = xssClean(updateData.username); // Apply XSS sanitization
+      updateData.username = xss(updateData.username); // Correct sanitization
     }
     if (updateData.email) {
-      updateData.email = xssClean(updateData.email); // Apply XSS sanitization
+      updateData.email = xss(updateData.email); // Apply XSS sanitization
     }
     
     const existingUser = await getUserById(id);
