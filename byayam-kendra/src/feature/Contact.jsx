@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "../css/ContactUs.css";  // Import the custom CSS file
 
@@ -10,12 +10,37 @@ const ContactUs = () => {
     issueType: "",
     message: "",
   });
-
+  const [userEmail, setUserEmail] = useState("");
   const [status, setStatus] = useState({
     type: null,
     message: "",
   });
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+    
+        const response = await fetch("http://localhost:3000/api/auth/email", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+    
+        if (!response.ok) {
+          const errorData = await response.json(); // Assuming your API returns JSON
+          console.error("Error fetching user email:", errorData);
+          return;
+        }
+    
+        const data = await response.json();
+        setUserEmail(data.email);
+      } catch (error) {
+        console.error("Error fetching user email:", error);
+      }
+    };
 
+    fetchUserEmail();
+  }, []);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -39,6 +64,7 @@ const ContactUs = () => {
         {
           name: formData.name,
           email: formData.email,
+          userEmail: userEmail,
           contactNumber: formData.contactNumber,
           issueType: formData.issueType,
           message: formData.message,

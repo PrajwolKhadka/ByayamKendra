@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { createUser, findUserByEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
+import { createUser, findUserByEmail,findUserForEmail, findUserByEmailOrUsername, getAllUsers,updateUser,deleteUser,findOtherUserByEmailOrUsername,getUserById } from '../model/userModel.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Signup
@@ -99,7 +99,17 @@ export const getAllUser = async (req, res) => {
     res.status(500).json({ error: 'Error fetching users' });
   }
 };
-
+export const getEmailUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const users = await findUserForEmail(userId);
+    res.json(users);
+    console.log(users);
+  } catch (error) {
+    
+    res.status(500).json({ error: 'Error fetching users' });
+  }
+};
 export const updateUsers = async (req, res) => {
   const { id } = req.params;
   let updateData = { ...req.body };

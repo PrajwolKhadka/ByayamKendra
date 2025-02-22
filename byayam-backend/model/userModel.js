@@ -30,7 +30,16 @@ export const findUserByEmail = async (email) => {
     WHERE email = $1;
   `;
   const { rows } = await pool.query(query, [email]);
-  return rows[0]; // Ensure this returns the user object including the role
+  return rows[0]; 
+};
+
+export const findUserForEmail = async (id) => {
+  const query = `
+    SELECT email FROM users 
+    WHERE id = $1;
+  `;
+  const { rows } = await pool.query(query, [id]);
+  return rows[0];
 };
 
 export const getAllUsers = async () => {
