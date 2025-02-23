@@ -7,7 +7,8 @@ import {
   deleteWorkoutLog,
   getWorkoutById,
 } from '../model/trackerModel.js';
-
+import xss from 'xss';
+import validator from 'validator'; 
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -27,7 +28,15 @@ export const addWorkout = async (req, res) => {
   try {
     const userId = verifyTokenAndGetUserId(req);
     const { workoutName, weight, reps, description } = req.body;
-
+    if (!validator.matches(workoutName, /^[a-zA-Z0-9_-]+$/)) {
+          return res.status(400).json({ error: 'Invalid workout name format' });
+    }
+    if (workoutName) {
+     workoutName = xss(workoutName); // Apply XSS sanitization
+    }
+    if (description) {
+      description = xss(description); // Apply XSS sanitization to description
+    }
     // Validation checks
     if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -79,7 +88,12 @@ export const updateWorkout = async (req, res) => {
     const  workoutId = req.params.id;
     const userId = verifyTokenAndGetUserId(req);
     const {workoutName, weight, reps, description } = req.body;
-
+    if (description) {
+      description = xss(description); // Apply XSS sanitization to description
+    }
+    if (workoutName) {
+      workoutName = xss(workoutName); // Apply XSS sanitization
+     }
     // Validation checks
     if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -129,7 +143,11 @@ export const deleteWorkout = async (req, res) => {
       return res.status(500).json({ error: 'Failed to delete workout log' });
     }
 
-    res.status(200).json({ message: 'Workout log deleted successfully' });
+    if (result > 0) {
+      res.status(200).json({ message: 'Workout deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Workout not found' });
+    }
   } catch (error) {
     console.error('Error deleting workout log:', error);
     res.status(500).json({ error: error.message || 'Server error' });
