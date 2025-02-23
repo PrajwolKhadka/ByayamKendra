@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { addStatusLog,getStateByUserId,deleteStatusLog,updateStatusLog,getStatusById } from '../model/workoutModel.js';
-
+import xss from 'xss';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -22,6 +22,15 @@ export const addStatus = async (req, res) => {
     const userId = verifyTokenAndGetUserId(req);
     const { age, height, weight, gender, fitness_level } = req.body;
 
+    if (height) {
+      height = xss(height);
+    }
+    if (weight) {
+      weight = xss(weight);
+    }
+      if (age) {
+        age = xss(age);
+      } 
     if (!age || !height || !weight || !gender || !fitness_level) {
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -104,6 +113,16 @@ export const updateStatus = async (req, res) => {
     const StatusId= req.params.id;
     const userId = verifyTokenAndGetUserId(req);
     const { age, height, weight, gender, fitness_level } = req.body;
+
+    if (height) {
+      height = xss(height);
+    }
+    if (weight) {
+      weight = xss(weight);
+    }
+      if (age) {
+        age = xss(age);
+      } 
 
     // Validation checks
     if (!age || !height || !weight || !gender || !fitness_level) {
