@@ -1,4 +1,4 @@
-// trackerRoutes.js
+
 import express from 'express';
 import verifyToken from '../middleware/verifyToken.js'; // Import the verifyToken middleware
 import {addStatus,updateStatus,getUserStatus,deleteStatus} from '../controller/workoutController.js'; 
