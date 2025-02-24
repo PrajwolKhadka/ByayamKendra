@@ -1,7 +1,11 @@
 import multer from 'multer';
 import path from 'path';
-import { addAdminWorkout,updateAdminWorkout,deleteAdminWorkout,getAllAdminWorkouts } from '../model/adminModel.js';
- 
+import { 
+    addAdminWorkout, updateAdminWorkout, deleteAdminWorkout, getAllAdminWorkouts 
+} from '../model/adminModel.js';
+import validator from 'validator'; 
+import xss from 'xss';
+
 // Set up multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -15,13 +19,27 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Function to sanitize input data (XSS + SQL Injection prevention)
+const sanitizeInput = (data) => {
+  if (typeof data === 'object') {
+    Object.keys(data).forEach(key => {
+      if (typeof data[key] === 'string') {
+        data[key] = xss(validator.escape(data[key]));
+      }
+    });
+  } else if (typeof data === 'string') {
+    return xss(validator.escape(data));
+  }
+  return data;
+};
+
 // Add a new workout for admin
 export const addAdminWorkoutController = async (req, res) => {
   try {
-    const workoutData = req.body;
-    const imageUrl = req.file ? req.file.path : null; // Get the file path
+    let workoutData = sanitizeInput(req.body); // Sanitize input data
+    const imageUrl = req.file ? req.file.path : null;
 
-    workoutData.imageUrl = imageUrl; // Add image URL to workout data
+    workoutData.imageUrl = imageUrl;
 
     const newWorkout = await addAdminWorkout(workoutData);
 
@@ -36,12 +54,13 @@ export const addAdminWorkoutController = async (req, res) => {
   }
 };
 
-export const updateAdminWorkoutController =async (req, res) => {
-  const { id } = req.params; // Get the workout ID from the URL parameters
-  const workoutData = req.body; // Get the updated workout data from the request body
+// Update workout
+export const updateAdminWorkoutController = async (req, res) => {
+  const { id } = req.params;
+  let workoutData = sanitizeInput(req.body); 
 
   if (req.file) {
-    workoutData.imageUrl = req.file.path; // Update image URL if a new file is uploaded
+    workoutData.imageUrl = req.file.path; 
   }
 
   try {
@@ -56,8 +75,9 @@ export const updateAdminWorkoutController =async (req, res) => {
   }
 };
 
+// Delete workout
 export const deleteAdminWorkoutController = async (req, res) => {
-  const { id } = req.params; // Get the workout ID from the URL parameters
+  const { id } = sanitizeInput(req.params); 
 
   try {
     const deletedWorkout = await deleteAdminWorkout(id);
@@ -71,6 +91,7 @@ export const deleteAdminWorkoutController = async (req, res) => {
   }
 };
 
+// Get all workouts
 export const getAllAdminWorkoutsController = async (req, res) => {
   try {
     const workouts = await getAllAdminWorkouts();
@@ -78,7 +99,7 @@ export const getAllAdminWorkoutsController = async (req, res) => {
       ...workout,
       imageUrl: workout.imageUrl ? `http://localhost:3000/${workout.imageUrl}` : null
     }));
-    res.json(workoutsWithFullImageUrl); // Respond with the list of workouts
+    res.json(workoutsWithFullImageUrl);
   } catch (error) {
     console.error('Error retrieving workouts:', error);
     res.status(500).json({ error: 'Failed to retrieve workouts' });
@@ -87,9 +108,10 @@ export const getAllAdminWorkoutsController = async (req, res) => {
 
 import { getWorkoutsByUserStatus } from '../model/adminModel.js';
 
+// Fetch user-specific workouts
 export const fetchUserWorkouts = async (req, res) => {
     try {
-        const { age, weight, height, fitness_level } = req.query;
+        let { age, weight, height, fitness_level } = sanitizeInput(req.query);
 
         if (!age || !weight || !height || !fitness_level) {
             return res.status(400).json({ message: "All fields are required" });
@@ -98,6 +120,7 @@ export const fetchUserWorkouts = async (req, res) => {
         const workouts = await getWorkoutsByUserStatus({ age, weight, height, fitness_level });
         res.json({ workouts });
     } catch (error) {
+        console.error("Error fetching workouts:", error);
         res.status(500).json({ message: "Error fetching workouts" });
     }
 };
