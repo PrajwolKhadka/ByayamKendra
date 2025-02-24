@@ -20,7 +20,7 @@ const verifyTokenAndGetUserId = (req) => {
 export const addStatus = async (req, res) => {
   try {
     const userId = verifyTokenAndGetUserId(req);
-    const { age, height, weight, gender, fitness_level } = req.body;
+    let { age, height, weight, gender, fitness_level } = req.body;
 
     if (height) {
       height = xss(height);
@@ -31,6 +31,9 @@ export const addStatus = async (req, res) => {
       if (age) {
         age = xss(age);
       } 
+      if (/<script|<\/script>/i.test(gender)) {
+        return res.status(400).json({ error: "Invalid gender input" });
+    }
     if (!age || !height || !weight || !gender || !fitness_level) {
       return res.status(400).json({ error: 'All fields are required' });
     }
