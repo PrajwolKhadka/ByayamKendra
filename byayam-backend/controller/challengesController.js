@@ -1,4 +1,5 @@
 import {getChallenges,addChallenge,updateChallenge,deleteChallenge} from "../model/challengesModel.js"
+import xss from "xss";
 export const getChallenge = async (req, res) => {
     try {
         const challenges = await getChallenges();
@@ -21,11 +22,14 @@ export const getDayChallenge = async (req, res) => {
 };
 // Add a new challenge
 export const addChallenges = async (req, res) => {
-    const { challenge_text } = req.body;
+    let  { challenge_text } = req.body;
     try {
+        
         if (!challenge_text) {
             return res.status(400).json({ error: 'Challenge text is required' });
         }
+        challenge_text = xss(challenge_text);
+
         await addChallenge(challenge_text);
         res.status(201).json({ message: 'Challenge added successfully' });
 
@@ -36,10 +40,14 @@ export const addChallenges = async (req, res) => {
 
 // Update an existing challenge
 export const updateChallenges = async (req, res) => {
-    const { id, challenge_text } = req.body;
+    let { id, challenge_text } = req.body;
+   
     if (!id || !challenge_text) {
         return res.status(400).json({ error: 'ID and challenge text are required' });
     }
+   
+    challenge_text = xss(challenge_text);
+    
     try {
         await updateChallenge(id, challenge_text);
         res.status(200).send('Challenge updated');
