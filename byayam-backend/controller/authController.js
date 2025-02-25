@@ -22,6 +22,9 @@ export const signup = async (req, res) => {
       return res.status(400).json({ error: 'Password must be at least 8 characters' });
     }
     console.log('Checking if user exists...');
+    const sanitizedUsername = xss(username);
+    const sanitizedEmail = xss(email);
+    const sanitizedGender = xss(gender);
     const existingUser = await findUserByEmailOrUsername(email, username);
 
     if (existingUser && existingUser.length > 0) {
@@ -35,7 +38,7 @@ export const signup = async (req, res) => {
     }
     console.log('Creating new user...');
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await createUser(username, email, hashedPassword, gender,role);
+    const newUser = await createUser(sanitizedUsername, sanitizedEmail, hashedPassword, sanitizedGender, role);
 
     console.log('User created: ', newUser);
     

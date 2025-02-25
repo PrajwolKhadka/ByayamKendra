@@ -117,25 +117,28 @@ export const updateStatus = async (req, res) => {
     const userId = verifyTokenAndGetUserId(req);
     const { age, height, weight, gender, fitness_level } = req.body;
 
-    if (height) {
-      height = xss(height);
+    let sanitizedAge = age;
+    let sanitizedHeight = height;
+    let sanitizedWeight = weight;
+    if (sanitizedHeight) {
+      sanitizedHeight = xss(sanitizedHeight);
     }
-    if (weight) {
-      weight = xss(weight);
+    if (sanitizedWeight) {
+      sanitizedWeight = xss(sanitizedWeight);
     }
-      if (age) {
-        age = xss(age);
-      } 
+    if (sanitizedAge) {
+      sanitizedAge = xss(sanitizedAge);
+    }
 
     // Validation checks
-    if (!age || !height || !weight || !gender || !fitness_level) {
+    if (!sanitizedAge || !sanitizedHeight || !sanitizedWeight || !gender || !fitness_level) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
     // Numerical validation
-    const ageNum = Number(age);
-    const heightNum = Number(height);
-    const weightNum = Number(weight);
+    const ageNum = Number(sanitizedAge);
+    const heightNum = Number(sanitizedHeight);
+    const weightNum = Number(sanitizedWeight);
     
     if (isNaN(ageNum) || isNaN(heightNum) || isNaN(weightNum)) {
       return res.status(400).json({ error: 'Age, height, and weight must be valid numbers' });
@@ -160,7 +163,7 @@ export const updateStatus = async (req, res) => {
     }
 
     // Proceed with update
-    const updatedLog = await updateStatusLog(
+    let updatedLog = await updateStatusLog(
       StatusId,
       userId,
       ageNum,

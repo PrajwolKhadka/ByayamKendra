@@ -28,29 +28,34 @@ export const addWorkout = async (req, res) => {
   try {
     const userId = verifyTokenAndGetUserId(req);
     const { workoutName, weight, reps, description } = req.body;
-    if (!validator.matches(workoutName, /^[a-zA-Z0-9_-]+$/)) {
-          return res.status(400).json({ error: 'Invalid workout name format' });
+    
+    let sanitizedWorkoutName = workoutName;
+    let sanitizedDescription = description;
+
+    if (!validator.matches(sanitizedWorkoutName, /^[a-zA-Z0-9_-]+$/)) {
+      return res.status(400).json({ error: 'Invalid workout name format' });
     }
-    if (workoutName) {
-     workoutName = xss(workoutName); // Apply XSS sanitization
+    if (sanitizedWorkoutName) {
+      sanitizedWorkoutName = xss(sanitizedWorkoutName); // Apply XSS sanitization
     }
-    if (description) {
-      description = xss(description); // Apply XSS sanitization to description
+    if (sanitizedDescription) {
+      sanitizedDescription = xss(sanitizedDescription); // Apply XSS sanitization to description
     }
+
     // Validation checks
-    if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
+    if (!sanitizedWorkoutName?.trim() || !weight || !reps || !sanitizedDescription?.trim()) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // Trim whitespace from text fields
-    const trimmedName = workoutName.trim();
-    const trimmedDesc = description.trim();
-
+    const trimmedWeight = weight.trim();
+    const trimmedReps = reps.trim();
+    const trimmedName = sanitizedWorkoutName.trim();
+    const trimmedDesc = sanitizedDescription.trim();
     const newLog = await addWorkoutLog(
       userId, 
       trimmedName, 
-      weight, 
-      reps, 
+      trimmedWeight, 
+      trimmedReps, 
       trimmedDesc
     );
 
@@ -88,27 +93,32 @@ export const updateWorkout = async (req, res) => {
     const  workoutId = req.params.id;
     const userId = verifyTokenAndGetUserId(req);
     const {workoutName, weight, reps, description } = req.body;
-    if (description) {
-      description = xss(description); // Apply XSS sanitization to description
+    let sanitizedWorkoutName = workoutName;
+    let sanitizedDescription = description;
+
+    if (sanitizedDescription) {
+      sanitizedDescription = xss(sanitizedDescription); // Apply XSS sanitization to description
     }
-    if (workoutName) {
-      workoutName = xss(workoutName); // Apply XSS sanitization
-     }
+    if (sanitizedWorkoutName) {
+      sanitizedWorkoutName = xss(sanitizedWorkoutName); // Apply XSS sanitization
+    }
+
     // Validation checks
-    if (!workoutName?.trim() || !weight || !reps || !description?.trim()) {
+    if (!sanitizedWorkoutName?.trim() || !weight || !reps || !sanitizedDescription?.trim()) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // Trim whitespace from text fields
-    const trimmedName = workoutName.trim();
-    const trimmedDesc = description.trim();
+    const trimmedWeight = weight.trim();
+    const trimmedReps = reps.trim();
+    const trimmedName = sanitizedWorkoutName.trim();
+    const trimmedDesc = sanitizedDescription.trim();
 
     const updatedLog = await updateWorkoutLog(
       workoutId,
       userId,
       trimmedName,
-      weight,
-      reps,
+      trimmedWeight,
+      trimmedReps,
       trimmedDesc
     );
 

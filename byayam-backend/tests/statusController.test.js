@@ -45,12 +45,12 @@ describe('Workout Controller Tests', () => {
   });
 
   test('should update a workout log', async () => {
-    const statusId = 21;
-    const age = 26;
-    const height = 176;
-    const weight = 71;
-    const gender = 'male';
-    const fitness_level = 'intermediate';
+    let statusId = 31;
+    let age = 26;
+    let height = 176;
+    let weight = 71;
+    let gender = 'male';
+    let fitness_level = 'intermediate';
 
     const response = await request(app)
       .put(`/api/protected/status/Status/${statusId}`)
