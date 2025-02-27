@@ -22,10 +22,6 @@ describe('Workout Tracker API Tests', () => {
     token = generateToken('testUser Id');
   });
 
-  afterAll(async () => {
-    // Clean up any resources that are being used
-  });
-
   // Test for SQL Injection
   test('should prevent SQL injection in addWorkout', async () => {
     const sqlInjectionPayload = {
@@ -63,9 +59,9 @@ describe('Workout Tracker API Tests', () => {
   // Test for 404 Unknown Route
   test('should return 404 for unknown route', async () => {
     const response = await request(app)
-      .get('/api/protected/tracker/unknown-route'); // Adjust the endpoint as necessary
+      .get('/api/protected/tracker/unknown-route'); 
 
     expect(response.status).toBe(404);
-    expect(response.body.error).toBe('Route not found'); // Adjust based on your error handling
+    expect(response.body.error).toBe('Route not found');
   });
 });

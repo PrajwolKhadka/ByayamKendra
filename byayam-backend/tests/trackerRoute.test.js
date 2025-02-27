@@ -17,7 +17,7 @@ describe('Workout Routes Tests', () => {
         await pool.end();
       });
   test('GET /api/protected/tracker/workouts should return user workouts', async () => {
-    const mockWorkouts = [{ id: 1, workout_name: 'Squats', weight: 80, reps: 10, description: 'Leg exercise' }];
+    const mockWorkouts = [{ id: 1, workout_name: 'Squats', weight: '10', reps: '10', description: 'Leg exercise' }];
     workoutModel.getWorkoutLogsByUserId.mockResolvedValue(mockWorkouts);
 
     const res = await request(app)
@@ -31,9 +31,9 @@ describe('Workout Routes Tests', () => {
   test('POST /api/protected/tracker/workouts should add a workout', async () => {
     const mockWorkout = { 
       id: 1, 
-      workoutName: 'Push Ups', // Change to workoutName
-      weight: 0, 
-      reps: 20, 
+      workoutName: 'PushUps', // Change to workoutName
+      weight: '10', 
+      reps: '10', 
       description: 'Bodyweight'
     };
     workoutModel.addWorkoutLog.mockResolvedValue(mockWorkout);
@@ -42,9 +42,9 @@ describe('Workout Routes Tests', () => {
       .post('/api/protected/tracker/workouts')
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
-        workoutName: 'Push Ups', // Change to workoutName
-        weight: 10, 
-        reps: 20, 
+        workoutName: 'PushUps', // Change to workoutName
+        weight: '10', 
+        reps: '10', 
         description: 'Bodyweight' 
       });
   
@@ -56,8 +56,8 @@ describe('Workout Routes Tests', () => {
     const updatedWorkout = { 
       id: 1, 
       workoutName: 'Updated Workout', // Change to workoutName
-      weight: 60, 
-      reps: 12, 
+      weight: '10', 
+      reps: '10', 
       description: 'Updated Desc' 
     };
     workoutModel.updateWorkoutLog.mockResolvedValue(updatedWorkout);
@@ -67,8 +67,8 @@ describe('Workout Routes Tests', () => {
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
         workoutName: 'Updated Workout', // Change to workoutName
-        weight: 60, 
-        reps: 12, 
+        weight: '10', 
+        reps: '10', 
         description: 'Updated Desc' 
       });
   
@@ -80,8 +80,8 @@ describe('Workout Routes Tests', () => {
     const mockWorkout = { 
       id: 1, 
       workoutName: 'Push Ups', 
-      weight: 10, 
-      reps: 20, 
+      weight: '10', 
+      reps: '10', 
       description: 'Bodyweight'
     };
 
