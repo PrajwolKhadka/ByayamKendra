@@ -1,4 +1,3 @@
-// App.jsx
 import React, { Suspense, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
@@ -10,7 +9,7 @@ import Feature from "./feature/feature.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Admin from "./admin/Admin.jsx";
 import ForgotPassword from "./public/ForgotPassword.jsx";
-// Override localStorage methods to detect token changes
+
 const tokenAwareLocalStorage = () => {
   const originalSetItem = localStorage.setItem;
   const originalRemoveItem = localStorage.removeItem;
