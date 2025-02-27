@@ -1,11 +1,10 @@
 import request from 'supertest';
-import app from '../index.js';  // Ensure you import your Express app
+import app from '../index.js';  
 import { pool } from '../db/db.js';
-import bcrypt from 'bcrypt';
 
-jest.mock('../db/db.js');  // Mock the database query function
+jest.mock('../db/db.js');  
 jest.mock('bcrypt', () => ({
-  hash: jest.fn().mockResolvedValue('hashedPassword'), // Add this
+  hash: jest.fn().mockResolvedValue('hashedPassword'), 
   compare: jest.fn().mockResolvedValue(true),
 }));
 
@@ -27,7 +26,7 @@ describe('Auth Controller Tests', () => {
 
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('User created successfully');
-    expect(response.body.token).toBeDefined(); // Ensure token is returned
+    expect(response.body.token).toBeDefined(); 
   });
 
   it('should fail to sign up if email/username already exists', async () => {

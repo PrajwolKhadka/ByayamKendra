@@ -1,5 +1,5 @@
 import { createUser, findUserByEmailOrUsername, findUserByEmail } from '../model/userModel.js';
-import { pool } from '../db/db.js'; // Ensure you're using a test database
+import { pool } from '../db/db.js';
 
 jest.mock('../db/db.js');  // Mock the database query function for unit testing
 

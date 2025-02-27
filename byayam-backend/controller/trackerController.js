@@ -32,25 +32,17 @@ export const addWorkout = async (req, res) => {
     let sanitizedWorkoutName = workoutName;
     let sanitizedDescription = description;
 
-    if (!validator.matches(sanitizedWorkoutName, /^[a-zA-Z0-9_-]+$/)) {
-      return res.status(400).json({ error: 'Invalid workout name format' });
-    }
-    if (sanitizedWorkoutName) {
-      sanitizedWorkoutName = xss(sanitizedWorkoutName); // Apply XSS sanitization
-    }
-    if (sanitizedDescription) {
-      sanitizedDescription = xss(sanitizedDescription); // Apply XSS sanitization to description
-    }
-
-    // Validation checks
-    if (!sanitizedWorkoutName?.trim() || !weight || !reps || !sanitizedDescription?.trim()) {
+    if (!workoutName || !weight || !reps || !description) {
       return res.status(400).json({ error: 'All fields are required' });
     }
-
     const trimmedWeight = weight.trim();
     const trimmedReps = reps.trim();
     const trimmedName = sanitizedWorkoutName.trim();
     const trimmedDesc = sanitizedDescription.trim();
+
+    if (!validator.matches(trimmedName, /^[a-zA-Z0-9_-]+$/)) {
+      return res.status(400).json({ error: 'Invalid workout name format' });
+    }
     const newLog = await addWorkoutLog(
       userId, 
       trimmedName, 

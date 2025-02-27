@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../index.js';  // Adjust to your server path
-import { pool } from '../db/db.js';  // Adjust to your DB config if needed
+import app from '../index.js'; 
+import { pool } from '../db/db.js';  
 
 describe('Security Tests for Authentication Routes', () => {
 
@@ -15,8 +15,8 @@ describe('Security Tests for Authentication Routes', () => {
         gender: 'male',
       });
     
-    expect(res.status).toBe(400);  // Ensure the request is rejected
-    expect(res.body.error).toMatch(/Invalid username format/);  // Or custom message
+    expect(res.status).toBe(400);  
+    expect(res.body.error).toMatch(/Invalid username format/);  
   });
 
   // Test for SQL Injection during user login
@@ -28,7 +28,7 @@ describe('Security Tests for Authentication Routes', () => {
         password: 'password123 OR 1=1 --',
       });
     
-    expect(res.status).toBe(400);  // Ensure the request is rejected
+    expect(res.status).toBe(400); 
     expect(res.body.error).toBe('Invalid email or password');
   });
 
@@ -48,7 +48,7 @@ describe('Security Tests for Authentication Routes', () => {
   // Test for XSS attack prevention in update user
   it('should prevent XSS attacks in user update', async () => {
     const res = await request(app)
-      .put('/api/auth/users/1')  // Adjust based on route
+      .put('/api/auth/users/1') 
       .send({
         username: '<script>alert("XSS")</script>'
       });
@@ -60,8 +60,8 @@ describe('Security Tests for Authentication Routes', () => {
   // Test for 404 error handling for unknown routes
   it('should return 404 for unknown routes', async () => {
     const res = await request(app).get('/api/auth/unknown-route');  // Unknown route
-    expect(res.status).toBe(404);  // Ensure 404 status is returned
-    expect(res.body.error).toBe('Route not found');  // Ensure the error message is correct
+    expect(res.status).toBe(404);  //  404 status is returned
+    expect(res.body.error).toBe('Route not found');  
   });
 
   // Test for SQL Injection in password reset
@@ -73,12 +73,12 @@ describe('Security Tests for Authentication Routes', () => {
         password: 'newpassword123',
       });
     
-    expect(res.status).toBe(404);  // Ensure the request is rejected
+    expect(res.status).toBe(404);  
     expect(res.body.error).toBe('Email not found');
   });
 
 });
 
 afterAll(async () => {
-    await pool.end();  // This closes the database connection after tests are finished
+    await pool.end(); 
   });

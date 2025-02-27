@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../index.js'; // Adjust the path to your app
+import app from '../index.js'; 
 import * as workoutModel from '../model/trackerModel.js';
 import jwt from 'jsonwebtoken';
 
@@ -20,9 +20,9 @@ describe('Workout Controller Tests', () => {
   test('POST /api/protected/tracker/workouts should add a workout', async () => {
     const mockWorkout = { 
       id: 1, 
-      workoutName: 'Push Ups', 
-      weight: 10, 
-      reps: 20, 
+      workoutName: 'PushUps', 
+      weight: '10', 
+      reps: '10', 
       description: 'Bodyweight'
     };
     workoutModel.addWorkoutLog.mockResolvedValue(mockWorkout);
@@ -31,9 +31,9 @@ describe('Workout Controller Tests', () => {
       .post('/api/protected/tracker/workouts')
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
-        workoutName: 'Push Ups', 
-        weight: 10, 
-        reps: 20, 
+        workoutName: 'PushUps', 
+        weight: '10', 
+        reps: '20', 
         description: 'Bodyweight' 
       });
   
@@ -47,8 +47,8 @@ describe('Workout Controller Tests', () => {
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
         workoutName: '', // Missing workout name
-        weight: 10, 
-        reps: 20, 
+        weight:'10', 
+        reps: '10', 
         description: 'Bodyweight' 
       });
   
@@ -83,8 +83,8 @@ describe('Workout Controller Tests', () => {
     const updatedWorkout = { 
       id: 1, 
       workoutName: 'Updated Workout', 
-      weight: 60, 
-      reps: 12, 
+      weight: '10', 
+      reps: '10', 
       description: 'Updated Desc' 
     };
     workoutModel.updateWorkoutLog.mockResolvedValue(updatedWorkout);
@@ -94,8 +94,8 @@ describe('Workout Controller Tests', () => {
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
         workoutName: 'Updated Workout', 
-        weight: 60, 
-        reps: 12, 
+        weight: '10', 
+        reps: '10', 
         description: 'Updated Desc' 
       });
   
@@ -109,8 +109,8 @@ describe('Workout Controller Tests', () => {
       .set('Authorization', `Bearer ${mockToken}`)
       .send({ 
         workoutName: '', // Missing workout name
-        weight: 60, 
-        reps: 12, 
+        weight: '10', 
+        reps: '10', 
         description: 'Updated Desc' 
       });
   
