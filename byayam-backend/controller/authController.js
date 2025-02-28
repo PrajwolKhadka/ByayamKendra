@@ -15,9 +15,9 @@ export const signup = async (req, res) => {
     if (!validator.isEmail(email)) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
-    if (!validator.matches(username, /^[a-zA-Z0-9_-]+$/)) {
-      return res.status(400).json({ error: 'Invalid username format' });
-    }
+    // if (!validator.matches(username, /^[a-zA-Z0-9_-]+$/)) {
+    //   return res.status(400).json({ error: 'Invalid username format' });
+    // }
     if (!password || password.length < 8) {
       return res.status(400).json({ error: 'Password must be at least 8 characters' });
     }

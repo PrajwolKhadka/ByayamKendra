@@ -40,9 +40,9 @@ export const addWorkout = async (req, res) => {
     const trimmedName = sanitizedWorkoutName.trim();
     const trimmedDesc = sanitizedDescription.trim();
 
-    if (!validator.matches(trimmedName, /^[a-zA-Z0-9_-]+$/)) {
-      return res.status(400).json({ error: 'Invalid workout name format' });
-    }
+    // if (!validator.matches(trimmedName, /^[a-zA-Z0-9_-]+$/)) {
+    //   return res.status(400).json({ error: 'Invalid workout name format' });
+    // }
     const newLog = await addWorkoutLog(
       userId, 
       trimmedName, 

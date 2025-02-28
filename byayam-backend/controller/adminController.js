@@ -1,5 +1,6 @@
 import multer from 'multer';
 import path from 'path';
+import he from 'he';
 import { 
     addAdminWorkout, updateAdminWorkout, deleteAdminWorkout, getAllAdminWorkouts 
 } from '../model/adminModel.js';
@@ -97,7 +98,8 @@ export const getAllAdminWorkoutsController = async (req, res) => {
     const workouts = await getAllAdminWorkouts();
     const workoutsWithFullImageUrl = workouts.map(workout => ({
       ...workout,
-      imageUrl: workout.imageUrl ? `http://localhost:3000/${workout.imageUrl}` : null
+      imageUrl: workout.imageUrl ? `http://localhost:3000/${workout.imageUrl}` : null,
+      description: he.decode(workout.description) // Decode HTML entities
     }));
     res.json(workoutsWithFullImageUrl);
   } catch (error) {

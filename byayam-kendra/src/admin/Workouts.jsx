@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/WorkoutView.css";
 import axios from "axios";
+import DOMPurify from "dompurify";
 
 const Workout = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -68,10 +69,10 @@ const Workout = () => {
                   expandedWorkouts[workout.id] ? "expanded" : "blurred"
                 }`}
               >
-                <div
-                  className="description-view"
-                  dangerouslySetInnerHTML={{ __html: workout.description }}
-                />
+              <div
+                className="description-view"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(workout.description) }}
+              />
               </div>
 
               <button
